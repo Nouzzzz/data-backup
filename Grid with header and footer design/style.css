@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.header{
+background-color: aqua;
+}
+
+.main{
+background-color: red;
+}
+
+.sectiona{
+background-color: orange;
+}
+
+.sectionb{
+background-color: green;
+}
+
+.carda{
+background-color: blueviolet;
+
+}
+
+
+.cardb{
+
+background-color: darkgoldenrod;
+}
+

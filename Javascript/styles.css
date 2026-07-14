@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main{
+    display: flex;
+    flex: 30;
+}
+
+header{
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    background-color: antiquewhite;
+}
+
+aside{
+    flex: 1;
+    padding: 12px;
+}
+
+input[type="checkbox"]{
+    margin-right: 10px;
+}
+
+
+section{
+    padding: 15px;
+    flex: 4;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.card{
+    box-shadow: 3px 3px 12px gray;
+    border-radius: 12px;
+}
+
+.category{
+    display: flex;
+    flex-direction: column;
+}

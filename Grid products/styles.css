@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    background-color: antiquewhite;
+    align-items: center;
+    flex: 1;
+    padding: 12px;
+}
+
+.main {
+    display: flex;
+}
+
+aside {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 16px;
+    padding: 18px;
+
+}
+
+section {
+    flex: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    padding: 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 12px;
+    border-radius: 18px;
+}
+
+.card:hover {
+    box-shadow: 1px 1px 1px 1px;
+}
+
+.category {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.range {
+    display: flex;
+    flex-direction: column;
+}
+
+.size {
+    display: flex;
+    gap: 12px;
+}
+
+.rating {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card img {
+    height: 250px;
+    border-radius: 18px;
+}
+
+.colors {
+    display: grid;
+    grid-template-columns: repeat(4, 28px);
+    gap: 12px;
+}
+
+.color {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+
+}
+
+.red {
+    background: red;
+}
+
+.orange {
+    background: orange;
+}
+
+.yellow {
+    background: yellow;
+}
+
+.green {
+    background: green;
+}
+
+.blue {
+    background: blue;
+}
+
+.salmon {
+    background: salmon;
+}
+
+.pink {
+    background: pink;
+}
+
+.brown {
+    background: brown;
+}
+
+.purple {
+    background: purple;
+}

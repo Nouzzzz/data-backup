@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+     display: grid;
+    grid-template-areas: "header header" "main main";
+      grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr 7fr 1fr; 
+}
+
+header{
+    background-color: aqua;
+    grid-area: header; 
+}
+
+/* aside{
+    background-color: black;
+    grid-area: aside;
+}
+
+section{
+    background-color: brown;
+    grid-area: section;
+}
+
+footer{
+    background-color: blue;
+    grid-area: footer;
+} */
+
+.main{
+    display: grid;
+    padding: 20px;
+    background-color: black;
+    grid-area: main;
+
+}
+
+.card{
+    display: grid;
+    background-color: brown;
+     grid-area: card;
+}

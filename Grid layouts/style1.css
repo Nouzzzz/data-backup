@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    display: grid;
+    grid-template-areas: "header header" "nav nav" "sec right" "art right" "footer footer"; 
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr 2fr 2fr 1fr;
+    gap: 12px;
+}
+
+header{
+    grid-area: header;
+    background-color: aqua;
+}
+
+nav{
+    background-color: orange;
+    grid-area: nav;
+}
+
+section{
+    background-color: green;
+    grid-area: sec;
+}
+
+article{
+    background-color: yellow;
+    grid-area: art;
+}
+
+aside{
+    background-color: brown;
+    grid-area: right;
+}
+
+footer{
+    background-color: violet;
+    grid-area: footer;
+}
