@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Employee management system </h1>
+    </header>
+
+       <div class="form">
+        <input id="name" type="text" placeholder="Name">
+       
+        <input id="uid" type="text" placeholder="Unique id">
+       
+        <input id="position" type="text" placeholder="Position">
+
+        <input id="salary" type="text" placeholder="Salary">
+
+      
+        <button id="btn">Add info</button>
+</div>
+       
+     <div id="itemcontainer">
+        <table id="table">
+            <tr>
+                <th>NAME</th>
+                <th>UNIQUE ID</th>
+                <th>POSITION</th>
+                <th>SALARY</th>
+                <th>ACTIONS</th>
+            </tr>
+        </table>
+     </div>    
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+let nums = [5,6,8,10]
+
+nums.splice(2,1,9)
+
+console.log(nums) -->
+<!-- 
+let name = document.getElementById("name")
+let uid = document.getElementById("uid")
+let position = document.getElementById("position")
+let salary = document.getElementById("salary")
+let btn = document.getElementById("btn")
+let btn1 = document.getElementById("btn1")
+let btn2 = document.getElementById("btn2")
+let itemcontainer = document.getElementById("itemcontainer")
+let employees = []
+
+
+function addEmployee() {
+    let employee = {
+        name: name.value,
+        uid: uid.value,
+        position: position.value,
+        salary: salary.value
+    }
+
+    employees.push(employee)
+}
+
+
+function clearfields() {
+    name.value = ""
+    uid.value = ""
+    position.value = ""
+    salary.value = ""
+}
+
+
+function display() {
+
+    table.innerHTML = `
+        <tr>
+                <th>Name</th>
+                <th>Unique id</th>
+                <th>Position</th>
+                <th>Salary</th>
+                <th>Actions</th>
+            </tr>
+    `
+
+    for (let i = 0; i < employees.length; i++) {
+        table.innerHTML += `
+           <tr>
+           <td>
+                <p>${employees[i].name}</p> </td>
+              <td>  <p>${employees[i].uid}</p></td>
+                <td><p>${employees[i].position}</p></td>
+                 <td><p>${employees[i].salary}</p> </td>
+                 <td>    <button id="btn1">Edit</button>
+                         <button id="btn2">Delete</button> </td>
+                 </tr>
+
+
+        `
+    }
+
+}
+
+
+function editinfo () {
+         
+}
+
+
+btn.addEventListener('click', () => {
+    addEmployee()
+    clearfields()
+    display()
+})
+
+btn1.addEventListener('click', () => {
+      editinfo()
+
+})
+
+btn2.addEventListener('click', () => {
+
+
+})
+ -->
+
+
+
+<!-- let nums = [2,4,5,3,7,8,9]
+
+nums.forEach((num) => {
+    if(num%3 == 0){
+        console.log(num)
+    }
+}) -->
+<!-- 
+// let students = [
+//     {
+//         name: "john",
+//         age : 25
+//     },
+//     {
+//         name: "david",
+//         age: 30
+//     },
+//     {
+//         name: "rahul",
+//         age: 28
+
+//     }
+// ]
+
+// console.log(students)
+
+// console.log(students[0])
+
+// students[1].age = 35;
+
+// console.log(students) -->
+<!-- 
+// let arr = [2,3,4,5,6,8,9]
+// max = 0; -->
+
+<!-- 
+// for (let i=0;i<arr.length;i++){
+      
+//  if(arr[i] > max)
+//  {
+//     max = arr[i]
+//  }
+       
+// }
+
+// console.log(max) -->

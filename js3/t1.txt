@@ -1,0 +1,213 @@
+let btn = document.getElementById("btn")
+let plus = document.getElementById("plus")
+let minus = document.getElementById("minus")
+let display = document.getElementById('display');
+
+let arr = ['orange', 'yellow', 'green', 'blue', 'black']
+
+btn.addEventListener('click', () => {
+
+    let ran = Math.floor(Math.random() * arr.length)
+    document.body.style.backgroundColor = arr[ran]
+
+})
+
+let count = 0
+
+
+
+plus.addEventListener('click', () => {
+
+    if (count < 10) {
+        count++
+        display.textContent = count;
+    }
+
+
+})
+
+
+
+minus.addEventListener('click', () => {
+
+    if (count > 0) {
+        count--
+        display.textContent = count;
+
+    }
+
+})
+
+ let itemcontainer = document.getElementById("itemcontainer")
+
+let items = [4,5,7,8]
+
+
+
+
+
+for(let i=0;i<items.length;i++){
+    itemcontainer.innerHTML += `
+        <div>${items[i]}</div>
+    `
+}
+
+
+let items = []
+
+
+items.push(5)
+
+console.log(items)
+
+items.push(10)
+
+console.log(items)
+
+items.pop()
+
+console.log(items)
+
+let btn = document.getElementById("btn")
+let colorinput = document.getElementById("colorinput")
+
+
+console.log(colorinput)
+
+btn.addEventListener('click',() => {
+    // document.body.style.backgroundColor = colorinput.value
+
+    document.body
+
+})
+
+
+let numinput = document.getElementById("numinput")
+let btn = document.getElementById("btn")
+let itemcontainer = document.getElementById("itemcontainer")
+// let items = [4,5,7,8]
+
+let items = []
+
+
+btn.addEventListener('click',() => {
+    items.push(numinput.value)
+    console.log(items)
+    display()
+})
+
+const display = () => {
+    itemcontainer.innerHTML = ""
+    for(let i=0;i<items.length;i++){
+        let div = document.createElement('div')
+        div.textContent = items[i]
+        itemcontainer.append(div)
+    }
+}
+
+let name = document.getElementById("name")
+let age = document.getElementById("age")
+let place = document.getElementById("place")
+let btn = document.getElementById("btn")
+let itemcontainer = document.getElementById("itemcontainer")
+
+let students = []
+
+function addStudent () {
+    let student = {
+        name:name.value,
+        age:age.value,
+        place:place.value
+    }
+
+    students.push(student)
+
+}
+
+
+function clearfields(){
+    name.value = ""
+    age.value = ""
+    place.value = ""
+}
+
+function display(){
+    itemcontainer.innerHTML = ""
+    for(let i=0;i<students.length;i++){
+        itemcontainer.innerHTML += `
+            <div>
+                <h2>${students[i].name}</h2>
+                <p>${students[i].age}</p>
+                <p>${students[i].place}</p>
+
+            </div>
+        `
+    }
+}
+
+btn.addEventListener('click',() => {
+    addStudent()
+    clearfields()
+    display()
+})
+
+
+let name = document.getElementById("name")
+let age = document.getElementById("age")
+let place = document.getElementById("place")
+let btn = document.getElementById("btn")
+let itemcontainer = document.getElementById("itemcontainer")
+
+let students = []
+
+function addStudent() {
+    let student = {
+        name: name.value,
+        age: age.value,
+        place: place.value
+    }
+
+    students.push(student)
+
+}
+
+function clearfields() {
+    name.value = ""
+    age.value = ""
+    place.value = ""
+}
+
+function display() {
+    itemcontainer.innerHTML = ""
+    for (let i = 0; i < students.length; i++) {
+        itemcontainer.innerHTML += `
+            <div>
+           
+           
+
+<table>
+  <tr>
+    <th>Name</th><br>
+    <th>Age</th><br>
+    <th>Place</th>
+  </tr>
+  <tr>
+    <td> <p>${students[i].name}</p></td>
+    <td><p>${students[i].age}</p></td>
+    <td><p>${students[i].place}</p></td>
+  </tr>
+</table>
+
+            </div>
+        `
+    }
+}
+
+
+btn.addEventListener('click', () => {
+    addStudent()
+    clearfields()
+    display()
+})
+
+
