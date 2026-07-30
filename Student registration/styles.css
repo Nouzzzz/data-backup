@@ -1,0 +1,130 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    background-color: salmon;
+    padding: 28px;
+    flex: 2
+}
+
+.content{
+    background-color: red;
+    display: flex;
+    flex: 5;
+   
+    
+}
+
+aside{
+    background-color: orange;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 20px;
+}
+
+section{
+    display: flex;
+    flex-wrap: wrap;
+    flex: 4;
+    background-color: green;
+    padding: 10px;
+
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap : 23px;
+    padding: 12px;
+
+    
+}
+
+.form input{
+    padding: 12px;
+}
+
+footer{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   flex: 2;
+   background-color: salmon;
+   justify-content: center;
+   padding: 30px;
+}
+
+.card{
+    border: 3px solid black;
+    
+    border-radius: 8px;
+    width: 145px;
+    height: 145px;
+    align-items: center;
+    justify-content: center;
+    background-color: white;   
+    display: flex;
+    margin: 8px;
+    background-color: cadetblue;
+     
+}
+
+.card1 {
+    border: 3px solid black;  
+    border-radius: 12px;
+    width: 300px;
+    height: 350px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin: 30px 30px 30px 30px;
+    background-color: cadetblue;
+     
+}
+
+#btn{
+    background-color: wheat;
+    padding: 11px 12px 11px 12px;
+    border-radius: 18px;
+    color: black;
+
+}
+
+#name, #division, #rollno {
+    border-radius: 6px;
+}
+
+#editbtn{
+        background-color: blue;
+        color: white;
+        border-radius: 18px;
+        padding: 12px 18px;
+        margin: 12px;
+}
+
+#deletebtn{
+      background-color: red;
+      color: white;
+        border-radius: 18px;
+         padding: 12px 18px;
+        margin: 22px;
+}
+
+.asideb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
