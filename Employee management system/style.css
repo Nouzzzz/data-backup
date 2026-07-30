@@ -54,6 +54,19 @@ td,tr,th {
     border-radius: 18px;
 }
 
+
+#updateBtn{
+    background-color: wheat;
+    padding: 3px 18px 3px 18px;
+    border-radius: 18px;
+}
+
+#deleteBtn{
+    background-color: wheat;
+    padding: 3px 18px 3px 18px;
+    border-radius: 18px;
+}
+
 #btn1{
     background-color: red;
     padding: 5px;
@@ -68,10 +81,5 @@ td,tr,th {
     
 }
 
-#updateBtn{
-    background-color: green;
-    color: white;
-    padding: 3px 18px;
-    border-radius: 18px;
-}
+
 

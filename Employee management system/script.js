@@ -2,17 +2,21 @@ let name = document.getElementById("name")
 let uid = document.getElementById("uid")
 let position = document.getElementById("position")
 let salary = document.getElementById("salary")
-
-let btn = document.getElementById("btn")          // Add button
-let updateBtn = document.getElementById("updateBtn") // Update button
-
-let table = document.getElementById("table")
-
-let employees = []
+let btn = document.getElementById("btn")
+let updateBtn = document.getElementById("updateBtn")
+let btn1 = document.getElementById("btn1")
+let btn2 = document.getElementById("btn2")
+let itemcontainer = document.getElementById("itemcontainer")
+let employees = JSON.parse(localStorage.getItem('employees')) || []
 let empindex = -1
 
-function addEmployee() {
 
+function updatestorage () {
+    localStorage.setItem('employees',JSON.stringify(employees))
+}
+
+
+function addEmployee() {
     let employee = {
         name: name.value,
         uid: uid.value,
@@ -21,7 +25,9 @@ function addEmployee() {
     }
 
     employees.push(employee)
+    updatestorage()
 }
+
 
 function clearfields() {
     name.value = ""
@@ -30,37 +36,39 @@ function clearfields() {
     salary.value = ""
 }
 
+
+
+
 function display() {
 
     table.innerHTML = `
-    <tr>
-        <th>Name</th>
-        <th>Unique id</th>
-        <th>Position</th>
-        <th>Salary</th>
-        <th>Actions</th>
-    </tr>
+        <tr>
+                <th>Name</th>
+                <th>Unique id</th>
+                <th>Position</th>
+                <th>Salary</th>
+                <th>Actions</th>
+            </tr>
     `
 
     for (let i = 0; i < employees.length; i++) {
-
         table.innerHTML += `
-        <tr>
-            <td>${employees[i].name}</td>
-            <td>${employees[i].uid}</td>
-            <td>${employees[i].position}</td>
-            <td>${employees[i].salary}</td>
-            <td>
-                <button class="btn1" onclick="setEdit(${i})">Edit</button>
-                <button class="btn2" onclick="deleteEmployee(${i})">Delete</button>
-            </td>
-        </tr>
+           <tr>
+           <td>
+                <p>${employees[i].name}</p> </td>
+              <td>  <p>${employees[i].uid}</p></td>
+                <td><p>${employees[i].position}</p></td>
+                 <td><p>${employees[i].salary}</p> </td>
+                 <td>    <button id="btn1" onclick="setEdit(${i})">Edit</button>
+                         <button id="btn2" onclick="deleteEmployee(${i})">Delete</button> 
+                 </tr>
+
+
         `
     }
 
 }
 
-// Load employee into form
 function setEdit(index) {
 
     empindex = index
@@ -70,14 +78,13 @@ function setEdit(index) {
     position.value = employees[index].position
     salary.value = employees[index].salary
 
-    // Hide Add button
     btn.style.display = "none"
 
-    // Show Update button
+   
     updateBtn.style.display = "inline-block"
 }
 
-// Update employee
+
 function updateEmployee() {
 
     employees[empindex] = {
@@ -87,37 +94,38 @@ function updateEmployee() {
         salary: salary.value
     }
 
+    updatestorage()
     display()
     clearfields()
 
-    // Show Add button again
     btn.style.display = "inline-block"
 
-    // Hide Update button
     updateBtn.style.display = "none"
 
     empindex = -1
 }
 
-// Delete employee
 function deleteEmployee(index) {
+    
+    employees.splice(index, 1) 
 
-    employees.splice(index, 1)
-
+    updatestorage()
     display()
+    clearfields()
+
+    btn.style.display = "inline-block"
+    updateBtn.style.display = "none"
+    empindex = -1
 }
 
-// Add button
-btn.addEventListener("click", () => {
 
+btn.addEventListener('click', () => {
     addEmployee()
     clearfields()
     display()
 })
 
-// Update button
-updateBtn.addEventListener("click", () => {
 
-    updateEmployee()
-
+updateBtn.addEventListener('click', () => {
+      updateEmployee()
 })
