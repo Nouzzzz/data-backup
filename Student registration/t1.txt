@@ -1,0 +1,231 @@
+let nameInput = document.getElementById("name") // Renamed from 'name' to avoid global window conflicts
+let age = document.getElementById("age")
+let rollno = document.getElementById("rollno")
+let form = document.getElementById("form")
+let main = document.getElementById("main")
+let addbtn = document.getElementById("addbtn")
+let updateBtn = document.getElementById("updateBtn")
+
+let students = []
+let stindex = -1;
+
+// Handle Form Submission
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    
+    // Check if we are updating an existing student or adding a new one
+    if (stindex === -1) {
+        let student = {
+            name: nameInput.value,
+            age: age.value,
+            rollno: rollno.value
+        }
+        students.push(student)
+    } else {
+        updateStudent()
+    }
+
+    display()
+    clearfields()
+})
+
+// Display Students in HTML
+function display() {
+    main.innerHTML = ""
+    // Added index parameter to track positions
+    students.forEach((s, index) => {
+        main.innerHTML += `
+            <div class="card"> 
+                <h2>Student details </h2><br>
+                <h3>Name: ${s.name}</h3>
+                <h3>Age: ${s.age}</h3>
+                <h3>Rollno: ${s.rollno}</h3><br>
+                <!-- Changed IDs to Classes and added data-index attributes -->
+                <button class="editbtn" data-index="${index}">Edit</button>
+                <button class="deletebtn" data-index="${index}">Delete</button>
+            </div>
+         `
+    })
+}
+
+// Event Delegation for Dynamic Edit and Delete Buttons
+main.addEventListener('click', (e) => {
+    // Get the index from the clicked button's data-index attribute
+    let index = parseInt(e.target.getAttribute('data-index'))
+
+    if (e.target.classList.contains('editbtn')) {
+        setEdit(index)
+    } 
+    else if (e.target.classList.contains('deletebtn')) {
+        deleteStudent(index)
+    }
+})
+
+// Delete Student Function
+function deleteStudent(index) {
+    students.splice(index, 1) 
+    display()
+    clearfields()
+
+    if (addbtn) addbtn.style.display = "inline-block"
+    if (updateBtn) updateBtn.style.display = "none"
+    stindex = -1
+}
+
+// Clear Input Fields
+function clearfields() {
+    // Removed main.value="" because main is a div element, not an input field
+    nameInput.value = ""
+    age.value = ""
+    rollno.value = ""
+}
+
+// Update Student Details
+function updateStudent() {
+    students[stindex] = {
+        name: nameInput.value,
+        age: age.value,
+        rollno: rollno.value
+    }
+    
+    if (addbtn) addbtn.style.display = "inline-block"
+    if (updateBtn) updateBtn.style.display = "none"
+    stindex = -1
+}
+
+// Populate Fields for Editing
+function setEdit(index) {
+    stindex = index
+
+    nameInput.value = students[index].name
+    age.value = students[index].age
+    rollno.value = students[index].rollno
+    
+    if (addbtn) addbtn.style.display = "none"
+    if (updateBtn) updateBtn.style.display = "inline-block"
+}
+
+// Hook up updateBtn if it exists externally, otherwise handled by form submit
+if (updateBtn) {
+    updateBtn.addEventListener('click', () => {
+        if (stindex !== -1) {
+            updateStudent();
+            display();
+            clearfields();
+        }
+    })
+}
+
+
+
+//old code
+let name = document.getElementById("name")
+let age = document.getElementById("age")
+let rollno = document.getElementById("rollno")
+let form = document.getElementById("form")
+let main = document.getElementById("main")
+let addbtn = document.getElementById("addbtn")
+let editbtn = document.getElementById("editbtn")
+let deletebtn = document.getElementById("deletebtn")
+let updateBtn = document.getElementById("updateBtn")
+
+let students = []
+let stindex = -1;
+
+form.addEventListener('submit' , (e) => {
+    e.preventDefault()
+    let student = {
+        // id:Date.now(),
+        name:name.value,
+        age:age.value,
+        rollno: rollno.value
+    }
+
+    students.push(student)
+
+    display()
+
+} )
+
+
+function display(){
+    main.innerHTML = ""
+    students.forEach((s) => {
+        main.innerHTML += `
+            <div class="card"> 
+            <h2>Student details </h2><br>
+            <h3>Name: ${s.name}</h3>
+            <h3>Age: ${s.age}</h3>
+            <h3>Rollno: ${s.rollno}</h3><br>
+            <button id="editbtn">Edit</button>
+            <button id="deletebtn">Delete</button>
+            </div>
+         `
+    })
+}
+
+editbtn.addEventListener('click', () => {
+    console.log("hello")
+})
+
+deletebtn.addEventListener('click', () => {
+    
+    console.log("delete")    
+    deleteStudent()
+    
+})
+
+function deleteStudent(index) {
+    
+    students.splice(index, 1) 
+
+    // updatestorage()
+    display()
+    clearfields()
+
+    addbtn.style.display = "inline-block"
+    updateBtn.style.display = "none"
+    stindex = -1
+}
+
+function clearfields() {
+    main.value = ""
+    name.value = ""
+    age.value = ""
+    rollno.value = ""
+}
+
+
+function updateStudent() {
+
+    students[stindex] = {
+        name: name.value,
+        age: age.value,
+        rollno: rollno.value
+    }
+
+    // updatestorage()
+    display()
+    clearfields()
+
+    addbtn.style.display = "inline-block"
+
+    updateBtn.style.display = "none"
+
+    stindex = -1
+}
+
+function setEdit(index) {
+
+    stindex = index
+
+    name.value = students[index].name
+    age.value = students[index].age
+    rollno.value = students[index].rollno
+    
+
+    addbtn.style.display = "none"
+
+   
+    updateBtn.style.display = "inline-block"
+}

@@ -1,105 +1,102 @@
 let name = document.getElementById("name")
-let division = document.getElementById("division")
+let age = document.getElementById("age")
 let rollno = document.getElementById("rollno")
-let btn = document.getElementById("btn")
-let updateBtn = document.getElementById("updateBtn")
-let btn1 = document.getElementById("btn1")
-let btn2 = document.getElementById("btn2")
-let editbtn = document.getElementById("editbtn")
-let deletebtn = document.getElementById("deletebtn")
-let content = document.getElementById("content")
-let students = []
-let stindex = -1
+let form = document.getElementById("form")
+let main = document.getElementById("main")
 
-function addStudent () {
-    let student = {
-        name: name.value,
-        division = division.value,
-        rollno = rollno.value
+let students = []
+let stindex = -1;
+
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    if (stindex === -1) {
+        students.push({
+            name: name.value,
+            age: age.value,
+            rollno: rollno.value
+        });
+    } else {
+        updateStudent();
     }
 
-    students.push(student)
+    display();
+    clearfields();
+});
+
+
+function display() {
+    main.innerHTML = ""
+    students.forEach((s, index) => {
+        main.innerHTML += `
+            <div class="card"> 
+                <h2>Student details </h2><br>
+                <h3>Name: ${s.name}</h3>
+                <h3>Age: ${s.age}</h3>
+                <h3>Rollno: ${s.rollno}</h3><br>
+                <button class="editbtn" data-index="${index}" style=" background-color: blue;
+    color: white;
+    border-radius: 18px;
+    padding: 2px 8px;
+    margin: 2px;">Edit</button>
+                <button class="deletebtn" data-index="${index}" style="background-color: red;
+    color: white;
+    border-radius: 18px;
+    padding: 2px 8px;
+    margin: 2px;">Delete</button>
+            </div>
+         `
+    })
+}
+
+main.addEventListener('click', (e) => {
+    let index = parseInt(e.target.getAttribute('data-index'))
+
+    if (e.target.classList.contains('editbtn')) {
+        setEdit(index)
+    }
+    else if (e.target.classList.contains('deletebtn')) {
+        deleteStudent(index)
+    }
+})
+
+function deleteStudent(index) {
+    students.splice(index, 1)
+    display()
+    clearfields()
+
+    if (addbtn) addbtn.style.display = "inline-block"
+    if (updateBtn) updateBtn.style.display = "none"
+    stindex = -1
 }
 
 function clearfields() {
     name.value = ""
-    division.value = ""
+    age.value = ""
     rollno.value = ""
 }
 
-function setEdit(index) {
-
-    stindex = index
-
-    name.value = students[index].name
-    division.value = students[index].division
-    rollno.value = students[index].rollno
-    
-
-    btn.style.display = "none"
-
-   
-    updateBtn.style.display = "inline-block"
-}
-
-
 function updateStudent() {
-
     students[stindex] = {
         name: name.value,
-        division: division.value,
+        age: age.value,
         rollno: rollno.value
     }
 
-    // updatestorage()
-    display()
-    clearfields()
-
-    btn.style.display = "inline-block"
-
-    updateBtn.style.display = "none"
-
+    if (addbtn) addbtn.style.display = "inline-block"
+    if (updateBtn) updateBtn.style.display = "none"
     stindex = -1
 }
 
-function deleteStudent(index) {
-    
-    students.splice(index, 1) 
+function setEdit(index) {
+    stindex = index
 
-    // updatestorage()
-    display()
-    clearfields()
+    name.value = students[index].name
+    age.value = students[index].age
+    rollno.value = students[index].rollno
 
-    btn.style.display = "inline-block"
-    updateBtn.style.display = "none"
-    stindex = -1
+    if (addbtn) addbtn.style.display = "none"
+    if (updateBtn) updateBtn.style.display = "inline-block"
 }
-
-function display () {
-    for (let i =0;i<students.lentgth;i++){
-        content.innerHTML += `
-        <p> ${students[i].name} </p>
-          <p> ${students[i].division} </p>
-            <p> ${students[i].rollno} </p>
-              
-        `
-    }
-}
-
-editbtn.addEventListener('click', () => {
-    <button id="btn1" onclick="setEdit(${i})">Edit</button>
-     updateStudent()
-})
-
-deletebtn.addEventListener('click', () => {
-      <button id="btn2" onclick="deleteStudent(${i})">Delete</button> 
-    deleteStudent()
-})
-
-
-btn.addEventListener('click', () => {
-    addStudent ()
-    clearfields()
-    display()
-})
 
