@@ -55,10 +55,16 @@ header{
     outline: 3px solid yellow;
 }
 
-.result {
-    background-color: orange;
-    display: flex;
-    justify-content: center;
-    flex: 3;
-    padding: 80px;
+.result{
+    text-align: center;
+    padding: 20px;
+}
+
+#main{
+    margin-top: 20px;
+}
+
+#main h1,
+#main h2{
+    margin: 10px 0;
 }

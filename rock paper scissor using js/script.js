@@ -6,8 +6,6 @@ let userchoice;
 let randomChoice;
 let choices = ["rock", "paper", "scissor"];
 
-
-
 function getcomputerchoice(){
     let randomout = Math.floor(Math.random() * choices.length);
 
@@ -16,21 +14,26 @@ function getcomputerchoice(){
 }
 
 
-function play(){
-    if(randomChoice == userchoice){
-    console.log("It is a tie")
-}
-else if(randomChoice == 'rock' && userchoice == 'paper'){
-    console.log("computer chose rock. You won")
-}else if(randomChoice == 'scissor' && userchoice == 'rock'){
-    console.log("computer chose scissor . you won")
-}else if(randomChoice == 'paper' && userchoice == 'scissor'){
-    console.log('computer chose paper. you win')
-} 
-else{
-    console.log(`Computer chose ${randomChoice}. computer won`)
-}
+function play() {
+    let message = "";
 
+    if (randomChoice === userchoice) {
+        message = "It's a Tie!";
+    } else if (
+        (userchoice === "rock" && randomChoice === "scissor") ||
+        (userchoice === "paper" && randomChoice === "rock") ||
+        (userchoice === "scissor" && randomChoice === "paper")
+    ) {
+        message = "You Won!";
+    } else {
+        message = "Computer Won!";
+    }
+
+    main.innerHTML = `
+        <h2>Your Choice: ${userchoice}</h2>
+        <h2>Computer Choice: ${randomChoice}</h2>
+        <h1>${message}</h1>
+    `;
 }
 
 rock.addEventListener('click', () => {
