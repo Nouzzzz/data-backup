@@ -108,28 +108,89 @@ footer {
 }
 
 
-
-
 #name,
 #age,
 #rollno {
     border-radius: 6px;
 }
 
-/* #editbtn {
-    background-color: blue;
-    color: white;
-    border-radius: 18px;
-    padding: 2px 8px;
-    margin: 2px;
+
+@media (min-width: 360px) {
+    .content{
+        display: flex;
+        flex-direction: column;
+    }
+
+    main{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+
+    .card1{
+        display: flex;
+        padding: 195px;
+    }
+    
+}
+
+@media(min-width:560px){
+       .content{
+        display: flex;
+        flex-direction: column;
+    }
+
+    main{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        
+    }
+    
+}
+
+
+@media(min-width:768px) {
+     
+ .content{
+        display: flex;
+        flex-direction: row;
+     }
+      main{
+        display: flex;
+        flex-wrap: wrap;
+        
+    }
 
 
 }
 
-#deletebtn {
-    background-color: red;
-    color: white;
-    border-radius: 18px;
-    padding: 2px 8px;
-    margin: 2px;
-} */
+@media(min-width:1024px) {
+ .content{
+        display: flex;
+        flex-direction: row;
+     }
+
+      main{
+        display: flex;
+        flex-wrap: wrap;
+        
+    }
+}
+
+
+@media(min-width:1268px) {
+ .content{
+        display: flex;
+        flex-direction: row;
+     }
+      main{
+        display: flex;
+        flex-wrap: wrap;
+        
+    }
+
+}
+
+

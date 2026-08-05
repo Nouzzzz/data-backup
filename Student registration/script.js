@@ -4,8 +4,15 @@ let rollno = document.getElementById("rollno")
 let form = document.getElementById("form")
 let main = document.getElementById("main")
 
-let students = []
+let students = JSON.parse(localStorage.getItem('students')) || []
 let stindex = -1;
+
+
+display()
+
+function updatestorage () {
+    localStorage.setItem('students',JSON.stringify(students))
+}
 
 
 form.addEventListener("submit", (e) => {
@@ -21,8 +28,11 @@ form.addEventListener("submit", (e) => {
         updateStudent();
     }
 
+   
     display();
+    updatestorage()
     clearfields();
+      
 });
 
 
@@ -69,6 +79,7 @@ function deleteStudent(index) {
     if (addbtn) addbtn.style.display = "inline-block"
     if (updateBtn) updateBtn.style.display = "none"
     stindex = -1
+    updatestorage();
 }
 
 function clearfields() {
@@ -87,6 +98,7 @@ function updateStudent() {
     if (addbtn) addbtn.style.display = "inline-block"
     if (updateBtn) updateBtn.style.display = "none"
     stindex = -1
+    updatestorage();
 }
 
 function setEdit(index) {

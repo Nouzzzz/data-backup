@@ -229,3 +229,112 @@ function setEdit(index) {
    
     updateBtn.style.display = "inline-block"
 }
+
+
+// 1. Fixed: Renamed variables to avoid conflicts and added missing button selections
+const nameInput = document.getElementById("name");
+const ageInput = document.getElementById("age");
+const rollnoInput = document.getElementById("rollno");
+const form = document.getElementById("form");
+const main = document.getElementById("main");
+
+// Make sure these IDs match the buttons in your HTML file
+const addbtn = document.getElementById("addbtn"); 
+const updateBtn = document.getElementById("updatebtn"); 
+
+let students = JSON.parse(localStorage.getItem('students')) || [];
+let stindex = -1;
+
+// 2. Fixed: Call display on startup so saved students show up immediately
+display();
+
+function updatestorage () {
+    localStorage.setItem('students', JSON.stringify(students));
+}
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    if (stindex === -1) {
+        students.push({
+            name: nameInput.value,
+            age: ageInput.value,
+            rollno: rollnoInput.value
+        });
+    } else {
+        updateStudent();
+    }
+   
+    display();
+    updatestorage();
+    clearfields();
+});
+
+function display() {
+    main.innerHTML = "";
+    students.forEach((s, index) => {
+        main.innerHTML += `
+            <div class="card"> 
+                <h2>Student details </h2><br>
+                <h3>Name: ${s.name}</h3>
+                <h3>Age: ${s.age}</h3>
+                <h3>Rollno: ${s.rollno}</h3><br>
+                <button class="editbtn" data-index="${index}" style="background-color: blue; color: white; border-radius: 18px; padding: 2px 8px; margin: 2px;">Edit</button>
+                <button class="deletebtn" data-index="${index}" style="background-color: red; color: white; border-radius: 18px; padding: 2px 8px; margin: 2px;">Delete</button>
+            </div>
+         `;
+    });
+}
+
+main.addEventListener('click', (e) => {
+    // Fixed: Guard clause in case a user clicks the container background instead of a button
+    if (!e.target.hasAttribute('data-index')) return; 
+    
+    let index = parseInt(e.target.getAttribute('data-index'));
+
+    if (e.target.classList.contains('editbtn')) {
+        setEdit(index);
+    } else if (e.target.classList.contains('deletebtn')) {
+        deleteStudent(index);
+    }
+});
+
+function deleteStudent(index) {
+    students.splice(index, 1);
+    display();
+    clearfields();
+
+    if (addbtn) addbtn.style.display = "inline-block";
+    if (updateBtn) updateBtn.style.display = "none";
+    stindex = -1;
+    updatestorage();
+}
+
+function clearfields() {
+    nameInput.value = "";
+    ageInput.value = "";
+    rollnoInput.value = "";
+}
+
+function updateStudent() {
+    students[stindex] = {
+        name: nameInput.value,
+        age: ageInput.value,
+        rollno: rollnoInput.value
+    };
+
+    if (addbtn) addbtn.style.display = "inline-block";
+    if (updateBtn) updateBtn.style.display = "none";
+    stindex = -1;
+}
+
+function setEdit(index) {
+    stindex = index;
+
+    nameInput.value = students[index].name;
+    ageInput.value = students[index].age;
+    rollnoInput.value = students[index].rollno;
+
+    if (addbtn) addbtn.style.display = "none";
+    if (updateBtn) updateBtn.style.display = "inline-block";
+}
