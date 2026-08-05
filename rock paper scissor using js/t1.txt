@@ -1,0 +1,84 @@
+console.log("hello")
+
+// callback function 
+
+// function add (a,back) {
+//     console.log(a)
+//     back()
+// }
+
+// function display () {
+//     for (let i=0;i<8;i++){
+//           console.log("testing...")
+//     }
+// }
+
+// add (10,display)
+
+// Higher order funtion a, MAP  
+// b, Filter 
+// c, 
+
+// let a = [1, 2, 3, 5]
+
+// let c = a.map ((i) => {
+
+//     return i * 3
+
+// })
+
+// console.log(c)
+
+// let a = [1,41,7 ,4,25,74]
+
+// console.log(a)
+
+// let c = a.slice(2)
+
+// console.log(c)
+
+// let d = a.splice(2,3)
+
+// console.log(d)
+
+
+
+let main = document.getElementById("main");
+let rock = document.getElementById("rock");
+let paper = document.getElementById("paper");
+let scissor = document.getElementById("scissor");
+
+let choices = ["rock", "paper", "scissor"];
+
+// Main function to play the game
+function playRound(playerChoice) {
+  // 1. Generate a new computer choice EVERY time a button is clicked
+  let randomout = Math.floor(Math.random() * choices.length);
+  let randomChoice = choices[randomout];
+  
+  console.log("Player chose:", playerChoice);
+  console.log("Computer chose:", randomChoice);
+
+  // 2. Clear previous results from the screen
+  main.innerHTML = "";
+
+  // 3. Compare the player's string choice to the computer's string choice
+  if (playerChoice === randomChoice) {
+    main.innerHTML = `<h2>Your guess is correct! (It was ${randomChoice})</h2>`;
+  } else {
+    main.innerHTML = `<h2>Wrong guess! Computer chose ${randomChoice}</h2>`;
+  }
+}
+
+// Event listeners passing the string name of the choice
+rock.addEventListener('click', () => {
+  playRound("rock");
+});
+
+paper.addEventListener('click', () => {
+  playRound("paper");
+});
+
+scissor.addEventListener('click', () => {
+  playRound("scissor");
+});

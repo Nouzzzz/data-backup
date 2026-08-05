@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+header{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    background-color:  salmon;
+    padding: 20px;
+}
+
+.user{
+    display: flex;
+    flex: 1;
+    background-color: antiquewhite;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.content{
+    background-color: rebeccapurple;
+    display: flex;
+    flex: 3;
+    justify-content: space-between;
+    padding: 50px;
+
+}
+
+.card{
+    border: 1px solid black;
+    border-radius: 18px;
+    width: 220px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: beige;
+    padding: 12px;
+    
+}
+
+.card:hover{
+    background-color: salmon;
+    outline: 3px solid yellow;
+}
+
+.result {
+    background-color: orange;
+    display: flex;
+    justify-content: center;
+    flex: 3;
+    padding: 80px;
+}
