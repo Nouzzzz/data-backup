@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+header {
+    background-color: salmon;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid black;
+    border-radius: 12px;
+    justify-content: center;
+    padding: 20px;
+    height: 300px;
+    width: 300px;
+    gap: 18px;
+}
+
+#depositbtn,
+#withdrawbtn,
+#checkbalbtn {
+    background-color: salmon;
+    display: flex;
+    justify-content: center;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+#depositbtn:hover,
+#withdrawbtn:hover,
+#checkbalbtn:hover {
+    background-color: orange;
+    border: 3px solid wheat;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#addbtn,
+#removebtn
+{
+    background-color:wheat;
+      border-radius: 18px;
+       padding: 12px;
+       display: flex;
+          flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     gap: 12px;
+}
+
+#depositid,
+#withdrawid
+ {
+    padding: 20px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+}

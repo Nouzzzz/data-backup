@@ -1,0 +1,163 @@
+let content = document.getElementById("content");
+let depositbtn = document.getElementById("depositbtn");
+let withdrawbtn = document.getElementById("withdrawbtn");
+let checkbalbtn = document.getElementById("checkbalbtn");
+let details = document.getElementById("details");
+
+let total = 0; // Tracks the user balance
+
+depositbtn.addEventListener('click', () => {
+    console.log("deposit clicked");
+    showDepositMenu();
+});
+
+withdrawbtn.addEventListener('click', () => {
+    console.log("withdraw clicked");
+    showWithdrawMenu();
+});
+
+checkbalbtn.addEventListener('click', () => {
+    console.log("check bal clicked");
+    checkbal();
+});
+
+// Render the Deposit Menu HTML
+function showDepositMenu() {
+    details.innerHTML = `
+        <h1> Deposit menu </h1><br>
+        <input type="number" id="depositid" placeholder="Enter amount to deposit"> <br>
+        <button id="addbtn"> Add </button>
+        <p id="msg"></p>
+    `;
+
+    // Listen for the click on the newly created "Add" button
+    document.getElementById("addbtn").addEventListener("click", () => {
+        let depositInput = document.getElementById("depositid");
+        let amount = Number(depositInput.value); // Convert string input to a number
+        let msgElement = document.getElementById("msg");
+
+        if (amount <= 0 || isNaN(amount)) {
+            msgElement.innerText = "Minimum value must be greater than 0";
+            msgElement.style.color = "red";
+        } else {
+            total += amount; // Proper mathematical addition
+            msgElement.innerText = `Amount added successfully! New Balance: ${total}`;
+            msgElement.style.color = "green";
+            depositInput.value = ""; // Clear input field
+        }
+    });
+}
+
+// Render the Withdraw Menu HTML
+function showWithdrawMenu() {
+    details.innerHTML = `
+        <h1>Withdraw menu </h1> <br>
+        <input type="number" id="withdrawid" placeholder="Enter amount to withdraw"> <br>
+        <button id="removebtn"> Withdraw </button>
+        <p id="withdrawMsg"></p>
+    `;
+
+    // Listen for the click on the newly created "Withdraw" button
+    document.getElementById("removebtn").addEventListener("click", () => {
+        let withdrawInput = document.getElementById("withdrawid");
+        let amount = Number(withdrawInput.value);
+        let msgElement = document.getElementById("withdrawMsg");
+
+        if (amount <= 0 || isNaN(amount)) {
+            msgElement.innerText = "Please enter a valid amount greater than 0";
+            msgElement.style.color = "red";
+        } else if (amount > total) {
+            msgElement.innerText = "Insufficient funds!";
+            msgElement.style.color = "red";
+        } else {
+            total -= amount; // Deduct from balance
+            msgElement.innerText = `Amount withdrawn successfully! Remaining Balance: ${total}`;
+            msgElement.style.color = "green";
+            withdrawInput.value = ""; // Clear input field
+        }
+    });
+}
+
+// Show current balance
+function checkbal() {
+    details.innerHTML = `<h1>Total Balance : ${total} </h1>`;
+}
+
+
+
+// let content = document.getElementById("content")
+// let depositbtn = document.getElementById("depositbtn")
+// let withdrawbtn = document.getElementById("withdrawbtn")
+// let checkbalbtn = document.getElementById("checkbalbtn")
+// let details = document.getElementById("details")
+
+// let amount = 0;
+// let depositInput = 0;
+// let total = 0;
+// let message = ""
+
+// depositbtn.addEventListener('click', () => {
+// console.log("deposit clicked")
+// deposit()
+// })
+
+// withdrawbtn.addEventListener('click', () => {
+// console.log("withdraw clicked")
+// withdraw()
+// })
+
+// checkbalbtn.addEventListener('click', () => {
+// console.log("check bal clicked")
+// checkbal()
+// })
+
+// function deposit () {
+
+
+// details.innerHTML = `
+
+//     <h1> Deposit menu </h1><br>
+//      <input type="text" id="depositid" placeholder="Enter amount to deposit"> <br>
+//      <button id="addbtn"> Add </button>
+     
+
+// `
+
+//  document.getElementById("addbtn").addEventListener("click", () => {
+//       let depositInput = document.getElementById("depositid");
+//       let amount = Number(depositInput.value);
+//       console.log(amount)
+//  })
+
+// if (depositInput.value <= 0) {
+//     message = "Minimum value must be greater than 0"
+// } else {
+//     total = total + depositInput.value;
+//     message = "Amount added successfully "
+// }
+
+// }
+
+
+
+// function withdraw () {
+
+// details.innerHTML = `
+// <h1>Withdraw menu </h1> <br>
+//  <input type="text" id="withdrawid" placeholder="Enter amount to withdraw"> <br>
+//      <button id="removebtn"> Withdraw </button>
+
+// `
+
+
+// }
+
+// function checkbal () {
+
+// details.innerHTML = `
+// <h1>Total Balance : ${total} </h1>
+
+// `
+
+
+// }
