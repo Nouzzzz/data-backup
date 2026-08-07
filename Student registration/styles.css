@@ -107,6 +107,22 @@ footer {
     padding: 12px;
 }
 
+.editbtn {
+    background-color: blue;
+    color: white;
+    border-radius: 18px;
+    padding: 2px 8px;
+    margin: 2px;
+}
+
+
+.deletebtn {
+    background-color: red;
+    color: white;
+    border-radius: 18px;
+    padding: 2px 8px;
+    margin: 2px;
+}
 
 #name,
 #age,

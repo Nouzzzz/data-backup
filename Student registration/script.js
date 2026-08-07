@@ -45,16 +45,8 @@ function display() {
                 <h3>Name: ${s.name}</h3>
                 <h3>Age: ${s.age}</h3>
                 <h3>Rollno: ${s.rollno}</h3><br>
-                <button class="editbtn" data-index="${index}" style=" background-color: blue;
-    color: white;
-    border-radius: 18px;
-    padding: 2px 8px;
-    margin: 2px;">Edit</button>
-                <button class="deletebtn" data-index="${index}" style="background-color: red;
-    color: white;
-    border-radius: 18px;
-    padding: 2px 8px;
-    margin: 2px;">Delete</button>
+                <button class="editbtn" data-index="${index}">Edit</button>
+                <button class="deletebtn" data-index="${index}">Delete</button>
             </div>
          `
     })
