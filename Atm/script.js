@@ -4,21 +4,29 @@ let withdrawbtn = document.getElementById("withdrawbtn");
 let checkbalbtn = document.getElementById("checkbalbtn");
 let details = document.getElementById("details");
 
-let total = 0; 
+let total = JSON.parse(localStorage.getItem('total')) || 0
+
+
+function updatestorage () {
+    localStorage.setItem('total',JSON.stringify(total))
+}
 
 depositbtn.addEventListener('click', () => {
     console.log("deposit clicked");
     depositMenu();
+    updatestorage()
 });
 
 withdrawbtn.addEventListener('click', () => {
     console.log("withdraw clicked");
     withdrawMenu();
+    updatestorage()
 });
 
 checkbalbtn.addEventListener('click', () => {
     console.log("check bal clicked");
     checkbal();
+    updatestorage()
 });
 
 
@@ -40,7 +48,7 @@ function depositMenu() {
             message.innerText = "Minimum value must be greater than 0";
         } else {
             total = total + amount; 
-            message.innerText = `Amount added successfully`;
+            message.innerText = `Amount added successfully, Total amount : ${total}`;  
             depositInput.value = ""; 
         }
     });
@@ -65,7 +73,7 @@ function withdrawMenu() {
             message.innerText = "Insufficient funds";
         } else {
             total = total - amount; 
-            message.innerText = `Amount withdrawn successfully`;
+            message.innerText = `Amount withdrawn successfully, Total amount : ${total}`;
             withdrawInput.value = ""; 
         }
     });
