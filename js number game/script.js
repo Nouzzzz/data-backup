@@ -1,33 +1,33 @@
-// let isRunning = true;
+let isRunning = true;
 
-// while (isRunning) {
+while (isRunning) {
 
-// let userinput = Math.floor(Math.random() * 10);
-// console.log(userinput); 
+let userinput = Math.floor(Math.random() * 10);
+console.log(userinput); 
 
-// for (let i = 0; i < 3; i++) {
-//     let guess = Number(prompt("Guess the number"));
+for (let i = 0; i < 3; i++) {
+    let guess = Number(prompt("Guess the number"));
 
-//     if (userinput == guess) {
-//         alert("Guess is correct");
-//         break; 
-//     } else {
+    if (userinput == guess) {
+        alert("Guess is correct");
+        break; 
+    } else {
         
-//         if (i < 2) {
-//             alert("Wrong guess, Try again");
-//         } else {
-//             alert("Game over, The correct number was " + userinput);
-//         }
-//     }
-// }
+        if (i < 2) {
+            alert("Wrong guess, Try again");
+        } else {
+            alert("Game over, The correct number was " + userinput);
+        }
+    }
+}
 
-// let playAgain = prompt("Do you want to play again? (y/n)");
+let playAgain = prompt("Do you want to play again? (y/n)");
 
-//     if (playAgain == "n") {
-//         isRunning = false;
-//         alert("Thanks for playing!");
-// }
-// }
+    if (playAgain == "n") {
+        isRunning = false;
+        alert("Thanks for playing!");
+}
+}
 
 
 
@@ -95,13 +95,13 @@
 // sum(4,5,greet)
 
 
-function greetings(username){
-    alert('Welcome ' + username);
-}
+// function greetings(username){
+//     alert('Welcome ' + username);
+// }
 
-function saveUserName (callback){
-    var name = prompt('please enter your name');
-    callback(name); 
-}
+// function saveUserName (callback){
+//     var name = prompt('please enter your name');
+//     callback(name); 
+// }
 
-saveUserName(greetings);
+// saveUserName(greetings);

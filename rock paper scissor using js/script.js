@@ -1,10 +1,13 @@
 let main = document.getElementById("main")
+let result = document.getElementById("result")
 let rock = document.getElementById("rock")
 let paper = document.getElementById("paper")
 let scissor = document.getElementById("scissor")
 let userchoice;
 let randomChoice;
 let choices = ["rock", "paper", "scissor"];
+
+
 
 function getcomputerchoice(){
     let randomout = Math.floor(Math.random() * choices.length);
@@ -18,15 +21,15 @@ function play() {
     let message = "";
 
     if (randomChoice === userchoice) {
-        message = "It's a Tie!";
+        message = "It's a Tie";
     } else if (
         (userchoice === "rock" && randomChoice === "scissor") ||
         (userchoice === "paper" && randomChoice === "rock") ||
         (userchoice === "scissor" && randomChoice === "paper")
     ) {
-        message = "You Won!";
+        message = "User Won";
     } else {
-        message = "Computer Won!";
+        message = "Computer Won";
     }
 
     main.innerHTML = `
@@ -53,9 +56,6 @@ scissor.addEventListener('click', () => {
     userchoice = "scissor"
     play()
 });
-
-
-
 
 
 
