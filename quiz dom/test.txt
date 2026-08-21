@@ -1,0 +1,431 @@
+// let box = document.getElementById("box");
+// let prev = document.getElementById("prev");
+// let next = document.getElementById("next");
+// let playagainbtn = document.getElementById("playagain");
+
+// let index = 0;
+// let score = 0;
+// let answered = false;
+
+// let quiz = [
+//     {
+//         question: "What company makes the Xperia model of smartphone?",
+//         options: ["Samsung", "Nokia", "Sony"],
+//         answer: "Sony",
+//     },
+
+//     {
+//         question: "Which of the following languages has the longest alphabet?",
+//         options: ["Greek", "Arabic", "Russian"],
+//         answer: "Russian",
+//     },
+
+//     {
+//         question: "Where was the first example of paper money used?",
+//         options: ["China", "India", "Turkey"],
+//         answer: "China",
+//     },
+
+//     {
+//         question: "Who is generally considered the inventor of the motor car?",
+//         options: ["Henry Ford", "Karl Benz", "Henry M. Leland"],
+//         answer: "Karl Benz",
+//     },
+
+//     {
+//         question: "Which horoscope sign is a fish?",
+//         options: ["Pisces", "Aquarius", "Cancer"],
+//         answer: "Pisces",
+//     },
+// ];
+
+// function display() {
+//     answered = false;
+
+//     box.innerHTML = `<h3>${quiz[index].question}</h3>`;
+
+//     quiz[index].options.forEach((option) => {
+//         let p = document.createElement("p");
+//         p.textContent = option;
+
+//         p.addEventListener("click", () => {
+           
+//             if (answered) {
+//                 return;
+//             }
+
+//             answered = true;
+
+//             if (option === quiz[index].answer) {
+//                 p.style.backgroundColor = "lightgreen";
+//                 score++;
+//             } else {
+//                 p.style.backgroundColor = "red";
+
+//                 const allOptions = box.querySelectorAll("p");
+
+//                 allOptions.forEach((item) => {
+//                     if (item.textContent === quiz[index].answer) {
+//                         item.style.backgroundColor = "lightgreen";
+//                     }
+//                 });
+//             }
+
+//             console.log("Score:", score);
+//         });
+
+//         box.appendChild(p);
+//     });
+// }
+
+// function playagain() {
+//     index = 0;
+//     score = 0;
+//     display();
+// }
+
+// function previousof() {
+//     if (index > 0) {
+//         index--;
+//         display();
+//     }
+// }
+
+// function nextof() {
+//     if (index < quiz.length - 1) {
+//         index++;
+//         display();
+//     }
+// }
+
+// display();
+
+// prev.addEventListener("click", () => {
+//     if (index === 0) {
+//         alert("You are at the first question, cannot go back further.");
+//         return;
+//     }
+
+//     previousof();
+// });
+
+// next.addEventListener("click", () => {
+//     if (index === quiz.length - 1) {
+//         box.innerHTML = `
+//             <h3>Quiz completed!</h3>
+//             <p>Your final score is ${score} / ${quiz.length}</p>
+//         `;
+//         return;
+//     }
+
+//     nextof();
+// });
+
+// playagainbtn.addEventListener("click", () => {
+//     if (confirm(`Are you sure you want to play again? Your total score is ${score}`)) {
+//         playagain();
+//     }
+// });
+
+
+// //
+// // let box = document.getElementById("box")
+// // let prev = document.getElementById("prev")
+// // let next = document.getElementById("next")
+// // let playagainbtn = document.getElementById("playagain")
+
+// // let index = 0
+// // let score = 0
+
+// // let quiz = [
+
+// //     {
+// //         questions: "What company makes the Xperia model of smartphone?",
+// //         options: [
+// //             "Samsung", "Nokia", "Sony"
+// //         ],
+// //         answer: "Sony",
+// //     },
+
+// //     {
+// //         questions: "Which of the following languages has the longest alphabet?",
+// //         options: [
+// //             "Greek", "Arabic", "Russian"
+// //         ],
+// //         answer: "Russian",
+// //     },
+
+// //     {
+// //         questions: "Where was the first example of paper money used?",
+// //         options: [
+// //             "China", "India", "Turkey"
+// //         ],
+// //         answer: "China",
+// //     },
+
+// //     {
+// //         questions: "Who is generally considered the inventor of the motor car",
+// //         options: [
+// //             "Henry ford", "Karl Benz", "Henry M Leleand"
+// //         ],
+// //         answer: "Karl Benz",
+// //     },
+
+// //     {
+// //         questions: "Which horoscope sign is a fish?",
+// //         options: [
+// //             "Pisces", "Aquaris", "Cancer"
+// //         ],
+// //         answer: "Pisces",
+// //     },
+
+// // ]
+
+// // function display() {
+// //     box.innerHTML = `<h3>${quiz[index].questions}</h3>`;
+
+// //     quiz[index].options.forEach((x) => {
+// //         let p = document.createElement('p');
+// //         p.textContent = x;
+
+
+// //         p.addEventListener('click', () => {
+// //             if (x === quiz[index].answer) {
+// //                 p.style.backgroundColor = "lightgreen";
+// //                 score++
+// //                 console.log(score)
+// //             } else {
+// //                 p.style.backgroundColor = "red";
+// //             }
+// //         });
+
+
+// //         box.appendChild(p);
+// //     });
+// // }
+
+
+// // function playagain() {
+// //     index = 0
+// //     score = 0
+// //     display()
+// // }
+
+
+// // function previousof() {
+
+// //     if (index == 0) {
+
+// //         return
+
+// //     }
+// //     index--
+
+// //     display()
+// // }
+
+// // function nextof() {
+
+// //     if (index == quiz.length - 1) {
+// //         return
+// //     }
+// //     index++
+
+// //     display()
+// // }
+
+
+// // display()
+
+// // prev.addEventListener('click', () => {
+// //     if (index == 0) {
+// //         alert("You are at the first question, cannot go back further.");
+// //         return;
+// //     }   
+// //     previousof()
+// // });
+
+// // next.addEventListener('click', () => {
+// //     if (index == quiz.length - 1) {
+// //         box.innerHTML += `<h3>Quiz completed, Your final score is ${score}</h3>`;
+        
+// //         return;
+// //     }
+// //     nextof()
+// // });
+
+// // playagainbtn.addEventListener('click', () => {
+// //         if (confirm("Are you sure you want to play again?" + "  Your total score is " + score)) {
+// //             playagain();
+// //         }
+// //     }
+// // );
+
+// ```javascript
+// let box = document.getElementById("box");
+// let prev = document.getElementById("prev");
+// let next = document.getElementById("next");
+// let playagainbtn = document.getElementById("playagain");
+
+// let index = 0;
+// let score = 0;
+
+// // Keeps track of whether each question has already been answered
+// let answered = [];
+
+// let quiz = [
+//     {
+//         questions: "What company makes the Xperia model of smartphone?",
+//         options: [
+//             "Samsung", "Nokia", "Sony"
+//         ],
+//         answer: "Sony",
+//     },
+
+//     {
+//         questions: "Which of the following languages has the longest alphabet?",
+//         options: [
+//             "Greek", "Arabic", "Russian"
+//         ],
+//         answer: "Russian",
+//     },
+
+//     {
+//         questions: "Where was the first example of paper money used?",
+//         options: [
+//             "China", "India", "Turkey"
+//         ],
+//         answer: "China",
+//     },
+
+//     {
+//         questions: "Who is generally considered the inventor of the motor car",
+//         options: [
+//             "Henry ford", "Karl Benz", "Henry M Leleand"
+//         ],
+//         answer: "Karl Benz",
+//     },
+
+//     {
+//         questions: "Which horoscope sign is a fish?",
+//         options: [
+//             "Pisces", "Aquaris", "Cancer"
+//         ],
+//         answer: "Pisces",
+//     },
+// ];
+
+
+// // Display the current question
+// function display() {
+//     box.innerHTML = `<h3>${quiz[index].questions}</h3>`;
+
+//     quiz[index].options.forEach((x) => {
+//         let p = document.createElement("p");
+//         p.textContent = x;
+
+//         // If this question was already answered,
+//         // show the previous answer color
+//         if (answered[index] !== undefined) {
+//             if (x === answered[index]) {
+//                 if (x === quiz[index].answer) {
+//                     p.style.backgroundColor = "lightgreen";
+//                 } else {
+//                     p.style.backgroundColor = "red";
+//                 }
+//             }
+//         }
+
+//         p.addEventListener("click", () => {
+
+//             // Don't allow the same question to be scored again
+//             if (answered[index] !== undefined) {
+//                 return;
+//             }
+
+//             answered[index] = x;
+
+//             if (x === quiz[index].answer) {
+//                 p.style.backgroundColor = "lightgreen";
+//                 score++;
+//                 console.log("Score:", score);
+//             } else {
+//                 p.style.backgroundColor = "red";
+//             }
+//         });
+
+//         box.appendChild(p);
+//     });
+// }
+
+
+// // Play again
+// function playagain() {
+//     index = 0;
+//     score = 0;
+//     answered = [];
+
+//     display();
+// }
+
+
+// // Previous question
+// function previousof() {
+//     if (index === 0) {
+//         alert("You are at the first question, cannot go back further.");
+//         return;
+//     }
+
+//     index--;
+//     display();
+// }
+
+
+// // Next question
+// function nextof() {
+//     if (index === quiz.length - 1) {
+//         box.innerHTML = `
+//             <h3>Quiz completed, Your final score is ${score}</h3>
+//         `;
+//         return;
+//     }
+
+//     index++;
+//     display();
+// }
+
+
+// // Display first question
+// display();
+
+
+// // Previous button
+// prev.addEventListener("click", () => {
+//     previousof();
+// });
+
+
+// // Next button
+// next.addEventListener("click", () => {
+//     if (index === quiz.length - 1) {
+//         box.innerHTML = `
+//             <h3>Quiz completed, Your final score is ${score}</h3>
+//         `;
+//         return;
+//     }
+
+//     nextof();
+// });
+
+
+// // Play again button
+// playagainbtn.addEventListener("click", () => {
+//     if (
+//         confirm(
+//             "Are you sure you want to play again? Your total score is " + score
+//         )
+//     ) {
+//         playagain();
+//     }
+// });
+// ```
