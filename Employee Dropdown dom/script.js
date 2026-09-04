@@ -6,10 +6,10 @@ let btn = document.getElementById("btn")
 let updateBtn = document.getElementById("updateBtn")
 let table = document.getElementById("table")
 let search = document.getElementById("search")
-
 let employees = JSON.parse(localStorage.getItem("employees")) || []
 let empindex = -1
 let filteredEmployees = employees
+let categories = document.getElementById("dropdown")
 
 function updatestorage() {
     localStorage.setItem("employees", JSON.stringify(employees))
@@ -36,13 +36,13 @@ function clearfields() {
 }
 
 function searchemployees() {
-    let searchvalue = search.value.toLowerCase().trim()
+    let searchvalue = search.value.toLowerCase()
 
     filteredEmployees = employees.filter((employee) => {
-        return String(employee.name).toLowerCase().includes(searchvalue) ||
-            String(employee.uid).toLowerCase().includes(searchvalue) ||
-            String(employee.department).toLowerCase().includes(searchvalue) ||
-            String(employee.salary).toLowerCase().includes(searchvalue)
+        return employee.name.toLowerCase().includes(searchvalue) ||
+            employee.uid.toLowerCase().includes(searchvalue) ||
+            employee.department.toLowerCase().includes(searchvalue) ||
+            employee.salary.toLowerCase().includes(searchvalue)
     })
 
     display()
@@ -52,6 +52,7 @@ search.addEventListener("input", searchemployees)
 
 function display() {
     table.innerHTML = `
+    
         <tr>
             <th>Name</th>
             <th>Unique id</th>
@@ -72,8 +73,8 @@ function display() {
                 <td><p>${employee.department}</p></td>
                 <td><p>${employee.salary}</p></td>
                 <td>
-                    <button onclick="setEdit(${originalIndex})">Edit</button>
-                    <button onclick="deleteEmployee(${originalIndex})">Delete</button>
+                    <button id="btn1" onclick="setEdit(${originalIndex})">Edit</button>
+                    <button id="btn2" onclick="deleteEmployee(${originalIndex})">Delete</button>
                 </td>
             </tr>
         `
@@ -90,6 +91,7 @@ function setEdit(index) {
 
     btn.style.display = "none"
     updateBtn.style.display = "inline-block"
+
 }
 
 function updateEmployee() {
@@ -104,15 +106,16 @@ function updateEmployee() {
         salary: salary.value
     }
 
+
     updatestorage()
 
     filteredEmployees = employees.filter((employee) => {
-        let searchvalue = search.value.toLowerCase().trim()
+        let searchvalue = search.value.toLowerCase()
 
-        return String(employee.name).toLowerCase().includes(searchvalue) ||
-            String(employee.uid).toLowerCase().includes(searchvalue) ||
-            String(employee.department).toLowerCase().includes(searchvalue) ||
-            String(employee.salary).toLowerCase().includes(searchvalue)
+        return employee.name.toLowerCase().includes(searchvalue) ||
+            employee.uid.toLowerCase().includes(searchvalue) ||
+            employee.department.toLowerCase().includes(searchvalue) ||
+            employee.salary.toLowerCase().includes(searchvalue)
     })
 
     display()
@@ -130,12 +133,12 @@ function deleteEmployee(index) {
     updatestorage()
 
     filteredEmployees = employees.filter((employee) => {
-        let searchvalue = search.value.toLowerCase().trim()
+        let searchvalue = search.value.toLowerCase()
 
-        return String(employee.name).toLowerCase().includes(searchvalue) ||
-            String(employee.uid).toLowerCase().includes(searchvalue) ||
-            String(employee.department).toLowerCase().includes(searchvalue) ||
-            String(employee.salary).toLowerCase().includes(searchvalue)
+        return employee.name.toLowerCase().includes(searchvalue) ||
+            employee.uid.toLowerCase().includes(searchvalue) ||
+            employee.department.toLowerCase().includes(searchvalue) ||
+            employee.salary.toLowerCase().includes(searchvalue)
     })
 
     display()
@@ -156,5 +159,14 @@ btn.addEventListener("click", () => {
 updateBtn.addEventListener("click", () => {
     updateEmployee()
 })
+
+
+categories.addEventListener('change',() => {
+    filteredEmployees = employees.filter((x) => {
+        return categories.value == "" ? employees : x.department.toLowerCase() == categories.value.toLowerCase()
+    })
+    display()
+})
+
 
 display()

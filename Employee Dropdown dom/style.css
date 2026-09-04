@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,17 +6,20 @@
 
 
 body {
-   min-height: 100vh;
-   display: flex;
-   flex-direction: column;
-   padding: 18px;
- 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 18px;
+    background-color: darkgray;
+
 }
 
-header{
+header {
     display: flex;
     justify-content: center;
+    /* margin : 20px; */
     padding: 30px;
+    background-color: coral;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -24,81 +27,96 @@ header{
     display: flex;
     align-items: center;
     justify-content: center;
-    gap : 12px;
+    gap: 12px;
     padding: 18px;
-    background-color: white;
+    background-color: whitesmoke;
+      /* margin : 20px; */
 }
 
 
 .search:hover {
-  background-color: white;
-    
+    background-color: white;
+
 }
 
-.search input{
+.search input {
     font-style: italic;
     padding: 3px 22px;
     border-radius: 8px;
     font-weight: 800;
+   
+}
+
+#dropdown {
+    border-radius: 12px;
+    padding: 3px;
+    font-style: italic;
+    background-color: wheat;
+  
 }
 
 .form {
     display: flex;
+      /* margin : 20px; */
     flex-direction: column;
     align-items: center;
-    gap: 18px;
+    gap: 12px;
     padding: 18px;
-   
-    
+    background-color: salmon;
+}
+
+.form input {
+    padding: 3px;
 }
 
 #itemcontainer {
-    
+
     display: flex;
     flex-direction: column;
     gap: 28px;
     padding: 18px;
 }
 
-td,tr,th {
+td,
+tr,
+th {
     text-align: center;
     border: 2px solid black;
     padding: 8px;
-   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color:  whitesmoke;
 }
 
-#btn{
-    /* background-color: wheat; */
+#btn {
+    background-color: wheat;
     padding: 3px 18px 3px 18px;
     border-radius: 18px;
 }
 
 
-#updateBtn{
-    /* background-color: wheat; */
+#updateBtn {
+    background-color: wheat;
     padding: 3px 18px 3px 18px;
     border-radius: 18px;
 }
 
-#deleteBtn{
-    /* background-color: wheat; */
+#deleteBtn {
+    background-color: wheat;
     padding: 3px 18px 3px 18px;
     border-radius: 18px;
 }
 
-#btn1{
-    /* background-color: red; */
+#btn1 {
+    background-color: lightblue;
     padding: 5px;
     border-radius: 8px;
-    
+
 }
 
-#btn2{
-    /* background-color: red; */
+#btn2 {
+    background-color: red;
+    color: wheat;
     padding: 5px;
     border-radius: 8px;
-    
+
 }
-
-
-

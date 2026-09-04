@@ -13,30 +13,42 @@
         <h1>Employee management system </h1>
     </header>
 
- <div class="search">
-        
-    <input type="search" id="search" placeholder="Search info">
-</div>
+    <div class="search">
 
-       <div class="form">
+        <input type="search" id="search" placeholder="Search info">
+         
+        <select id="dropdown">
+        <option value="">select department</option>
+        <option value="CSE">CSE</option>
+        <option value="EEE">EEE</option>
+        <option value="civil">CIVIL</option>
+        <option value="civil">MECH</option>
+         <option value="civil">EC</option>
+    </select>
+
+    </div>
+
+   
+
+    <div class="form">
         <input id="name" type="text" placeholder="Name">
-       
+
         <input id="uid" type="text" placeholder="Unique id">
-       
+
         <input id="department" type="text" placeholder="Department">
 
         <input id="salary" type="text" placeholder="Salary">
 
-              <button id="btn">Add info</button>
+        <button id="btn">Add info</button>
 
-       <button id="updateBtn" style="display:none;">
-    Update Info
-</button>
+        <button id="updateBtn" style="display:none;">
+            Update Info
+        </button>
 
 
-</div>
-       
-     <div id="itemcontainer">
+    </div>
+
+    <div id="itemcontainer">
         <table id="table">
             <tr>
                 <th>NAME</th>
@@ -44,10 +56,10 @@
                 <th>Department</th>
                 <th>SALARY</th>
                 <th>ACTIONS</th>
-                
+
             </tr>
         </table>
-     </div>    
+    </div>
 
 
 
@@ -55,30 +67,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
