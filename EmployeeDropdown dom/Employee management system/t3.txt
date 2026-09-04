@@ -1,0 +1,168 @@
+let name = document.getElementById("name")
+let uid = document.getElementById("uid")
+let department = document.getElementById("department")
+let salary = document.getElementById("salary")
+let btn = document.getElementById("btn")
+let updateBtn = document.getElementById("updateBtn")
+let table = document.getElementById("table")
+let search = document.getElementById("search")
+let searchBy = document.getElementById("searchBy")
+
+let employees = JSON.parse(localStorage.getItem("employees")) || []
+let filteredEmployees = employees
+let empindex = -1
+
+function updatestorage() {
+    localStorage.setItem("employees", JSON.stringify(employees))
+}
+
+function addEmployee() {
+    let employee = {
+        name: name.value,
+        uid: uid.value,
+        department: department.value,
+        salary: salary.value
+    }
+
+    employees.push(employee)
+    updatestorage()
+}
+
+function clearfields() {
+    name.value = ""
+    uid.value = ""
+    department.value = ""
+    salary.value = ""
+}
+
+function searchemployees() {
+    let searchvalue = search.value.toLowerCase().trim()
+    let selectedField = searchBy.value
+
+    if (searchvalue === "") {
+        filteredEmployees = employees
+        display()
+        return
+    }
+
+    filteredEmployees = employees.filter(employee => {
+        if (selectedField === "name") {
+            return String(employee.name).toLowerCase().includes(searchvalue)
+        }
+
+        if (selectedField === "uid") {
+            return String(employee.uid).toLowerCase().includes(searchvalue)
+        }
+
+        if (selectedField === "department") {
+            return String(employee.department).toLowerCase().includes(searchvalue)
+        }
+
+        if (selectedField === "salary") {
+            return String(employee.salary).toLowerCase().includes(searchvalue)
+        }
+
+        return String(employee.name).toLowerCase().includes(searchvalue) ||
+            String(employee.uid).toLowerCase().includes(searchvalue) ||
+            String(employee.department).toLowerCase().includes(searchvalue) ||
+            String(employee.salary).toLowerCase().includes(searchvalue)
+    })
+
+    display()
+}
+
+search.addEventListener("input", searchemployees)
+
+searchBy.addEventListener("change", searchemployees)
+
+function display() {
+    table.innerHTML = `
+        <tr>
+            <th>Name</th>
+            <th>Unique id</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Actions</th>
+        </tr>
+    `
+
+    for (let i = 0; i < filteredEmployees.length; i++) {
+        let employee = filteredEmployees[i]
+        let originalIndex = employees.indexOf(employee)
+
+        table.innerHTML += `
+            <tr>
+                <td><p>${employee.name}</p></td>
+                <td><p>${employee.uid}</p></td>
+                <td><p>${employee.department}</p></td>
+                <td><p>${employee.salary}</p></td>
+                <td>
+                    <button onclick="setEdit(${originalIndex})">Edit</button>
+                    <button onclick="deleteEmployee(${originalIndex})">Delete</button>
+                </td>
+            </tr>
+        `
+    }
+}
+
+function setEdit(index) {
+    empindex = index
+
+    name.value = employees[index].name
+    uid.value = employees[index].uid
+    department.value = employees[index].department
+    salary.value = employees[index].salary
+
+    btn.style.display = "none"
+    updateBtn.style.display = "inline-block"
+}
+
+function updateEmployee() {
+    if (empindex === -1) {
+        return
+    }
+
+    employees[empindex] = {
+        name: name.value,
+        uid: uid.value,
+        department: department.value,
+        salary: salary.value
+    }
+
+    updatestorage()
+    clearfields()
+
+    btn.style.display = "inline-block"
+    updateBtn.style.display = "none"
+
+    empindex = -1
+
+    searchemployees()
+}
+
+function deleteEmployee(index) {
+    employees.splice(index, 1)
+
+    updatestorage()
+
+    clearfields()
+
+    btn.style.display = "inline-block"
+    updateBtn.style.display = "none"
+
+    empindex = -1
+
+    searchemployees()
+}
+
+btn.addEventListener("click", () => {
+    addEmployee()
+    clearfields()
+    searchemployees()
+})
+
+updateBtn.addEventListener("click", () => {
+    updateEmployee()
+})
+
+display()
