@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Employee Management</h1>
+    </header>
+
+    <section id="content">
+
+        <input
+            type="text"
+            id="ename"
+            placeholder="Employee Name"
+        >
+
+        <input
+            type="text"
+            id="uid"
+            placeholder="Unique ID"
+        >
+
+        <input
+            type="text"
+            id="department"
+            placeholder="Department"
+        >
+
+        <input
+            type="number"
+            id="salary"
+            placeholder="Salary"
+        >
+
+        <button id="addbtn">Add Employee</button>
+
+    </section>
+
+    <section id="gallery">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="Search employee..."
+        >
+
+        <table id="table">
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Unique ID</th>
+                    <th>Department</th>
+                    <th>Salary</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody id="tablebody"></tbody>
+
+        </table>
+
+    </section>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
+
+sript
+
+const addbtn = document.getElementById("addbtn");
+const department = document.getElementById("department");
+const ename = document.getElementById("ename");
+const uid = document.getElementById("uid");
+const salary = document.getElementById("salary");
+const search = document.getElementById("search");
+const tablebody = document.getElementById("tablebody");
+
+let employee = JSON.parse(localStorage.getItem("employee")) || [];
+let filteremployee = [...employee];
+
+let setedit = null;
+let editButton = null;
+
+function addnewuser() {
+
+    const nameValue = ename.value.trim();
+    const uidValue = uid.value.trim();
+    const departmentValue = department.value.trim();
+    const salaryValue = salary.value.trim();
+
+    if (
+        nameValue === "" ||
+        uidValue === "" ||
+        departmentValue === "" ||
+        salaryValue === ""
+    ) {
+        alert("Please fill all the fields.");
+        return;
+    }
+
+    if (setedit !== null) {
+
+        const empUpdate = employee.find(
+            emp => emp.id === setedit
+        );
+
+        if (empUpdate) {
+            empUpdate.ename = nameValue;
+            empUpdate.uid = uidValue;
+            empUpdate.department = departmentValue;
+            empUpdate.salary = salaryValue;
+        }
+
+        cancelEdit();
+
+    } else {
+
+        const newemployee = {
+            id: Date.now(),
+            ename: nameValue,
+            uid: uidValue,
+            department: departmentValue,
+            salary: salaryValue
+        };
+
+        employee.push(newemployee);
+
+        clearfields();
+    }
+
+    syncFilteredList();
+    displayuser();
+    updatestorage();
+}
+
+function updatestorage() {
+
+    localStorage.setItem(
+        "employee",
+        JSON.stringify(employee)
+    );
+
+}
+
+function clearfields() {
+
+    ename.value = "";
+    uid.value = "";
+    department.value = "";
+    salary.value = "";
+
+}
+
+function cancelEdit() {
+
+    setedit = null;
+
+    clearfields();
+
+    addbtn.innerText = "Add Employee";
+
+    if (editButton) {
+        editButton.innerText = "Edit";
+        editButton = null;
+    }
+
+}
+
+function updateuser(id, button) {
+
+    if (setedit === id) {
+        cancelEdit();
+        return;
+    }
+
+    if (editButton) {
+        editButton.innerText = "Edit";
+    }
+
+    const empUpdate = employee.find(
+        emp => emp.id === id
+    );
+
+    if (!empUpdate) {
+        return;
+    }
+
+    ename.value = empUpdate.ename;
+    uid.value = empUpdate.uid;
+    department.value = empUpdate.department;
+    salary.value = empUpdate.salary;
+
+    setedit = id;
+    editButton = button;
+
+    button.innerText = "Cancel";
+    addbtn.innerText = "Update Employee";
+}
+
+function displayuser() {
+
+    if (!tablebody) {
+        return;
+    }
+
+    tablebody.innerHTML = "";
+
+    filteremployee.forEach(currentEmp => {
+
+        const row = document.createElement("tr");
+
+        const nameCell = document.createElement("td");
+        nameCell.textContent = currentEmp.ename;
+        row.appendChild(nameCell);
+
+        const uidCell = document.createElement("td");
+        uidCell.textContent = currentEmp.uid;
+        row.appendChild(uidCell);
+
+        const departmentCell = document.createElement("td");
+        departmentCell.textContent = currentEmp.department;
+        row.appendChild(departmentCell);
+
+        const salaryCell = document.createElement("td");
+        salaryCell.textContent = currentEmp.salary;
+        row.appendChild(salaryCell);
+
+        const actionCell = document.createElement("td");
+
+        const updateButton = document.createElement("button");
+
+        updateButton.className = "updatebtn";
+
+        if (setedit === currentEmp.id) {
+            updateButton.innerText = "Cancel";
+            editButton = updateButton;
+        } else {
+            updateButton.innerText = "Edit";
+        }
+
+        updateButton.addEventListener(
+            "click",
+            () => {
+                updateuser(
+                    currentEmp.id,
+                    updateButton
+                );
+            }
+        );
+
+        const deleteButton = document.createElement("button");
+
+        deleteButton.className = "deletebtn";
+        deleteButton.innerText = "Delete";
+
+        deleteButton.addEventListener(
+            "click",
+            () => {
+                deleteuser(currentEmp.id);
+            }
+        );
+
+        actionCell.appendChild(updateButton);
+        actionCell.appendChild(deleteButton);
+
+        row.appendChild(actionCell);
+
+        tablebody.appendChild(row);
+
+    });
+
+}
+
+function searchuser() {
+
+    const searchvalue =
+        search.value.trim().toLowerCase();
+
+    filteremployee = employee.filter(emp => {
+
+        const name =
+            String(emp.ename).toLowerCase();
+
+        const employeeId =
+            String(emp.uid).toLowerCase();
+
+        const departmentName =
+            String(emp.department).toLowerCase();
+
+        const employeeSalary =
+            String(emp.salary).toLowerCase();
+
+        return (
+            name.includes(searchvalue) ||
+            employeeId.includes(searchvalue) ||
+            departmentName.includes(searchvalue) ||
+            employeeSalary.includes(searchvalue)
+        );
+
+    });
+
+}
+
+function syncFilteredList() {
+
+    if (search.value.trim() === "") {
+        filteremployee = [...employee];
+    } else {
+        searchuser();
+    }
+
+}
+
+function deleteuser(id) {
+
+    const confirmdelete = confirm(
+        "Are you sure you want to delete this employee?"
+    );
+
+    if (!confirmdelete) {
+        return;
+    }
+
+    if (setedit === id) {
+        cancelEdit();
+    }
+
+    employee = employee.filter(
+        emp => emp.id !== id
+    );
+
+    syncFilteredList();
+    displayuser();
+    updatestorage();
+
+}
+
+search.addEventListener(
+    "input",
+    () => {
+        searchuser();
+        displayuser();
+    }
+);
+
+addbtn.addEventListener(
+    "click",
+    () => {
+        addnewuser();
+    }
+);
+
+syncFilteredList();
+displayuser();
+
+
+styl3
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family:
+        "Trebuchet MS",
+        "Lucida Sans Unicode",
+        "Lucida Grande",
+        "Lucida Sans",
+        Arial,
+        sans-serif;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    width: 280px;
+    padding: 10px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+input:focus {
+    outline: 2px solid #555;
+}
+
+button {
+    padding: 8px 14px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#addbtn {
+    margin-top: 5px;
+}
+
+#gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    overflow-x: auto;
+}
+
+#search {
+    align-self: center;
+}
+
+#table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+tr,
+th {
+    text-align: center;
+    border: 2px solid black;
+    padding: 8px;
+    font-family:
+        "Trebuchet MS",
+        "Lucida Sans Unicode",
+        "Lucida Grande",
+        "Lucida Sans",
+        Arial,
+        sans-serif;
+}
+
+th {
+    font-weight: bold;
+}
+
+.updatebtn {
+    margin-right: 5px;
+}
+
+.deletebtn {
+    margin-left: 5px;
+}
+
+@media (max-width: 600px) {
+
+    #search {
+        width: 90%;
+    }
+
+    #table {
+        min-width: 650px;
+    }
+
+}
