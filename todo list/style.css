@@ -1,0 +1,65 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+header {
+    display: flex;
+    padding: 28px;
+    background-color: salmon;
+    justify-content: center;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px;
+}
+
+#note {
+   padding: 22px;
+   border-radius: 12px;
+}
+
+#addbtn {
+    display: flex;
+    justify-content: center;
+    padding: 3px;
+    width: 50px;
+    align-items: center;
+    border-radius: 12px;
+    margin: 0 auto;
+}
+
+#card {
+    padding: 15px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+
+}
+
+
+#deletebtn {
+    padding: 6px;
+    border-radius: 18px;
+    background-color: rgb(163, 12, 12);
+    color: white;
+}
+
+#completebtn {
+    background-color: black;
+    color: white;
+    border-radius: 18px;
+    padding: 2px 8px;
+    margin: 2px;
+}
