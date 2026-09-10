@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+}
+
+#showbtn {
+    padding: 8px;
+    margin: 0 auto;
+    border-radius: 18px;
+}
+
+header{
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+}
+
+#gallery {
+    padding: 20px;
+}
