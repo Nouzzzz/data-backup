@@ -1,0 +1,188 @@
+let isloading = false
+
+function showloading() {
+    container.innerHTML = ""
+    container.innerHTML += `    
+    <div id="icontent">
+        <h2>Loading...</h2>
+    </div>
+    `
+}
+
+function getweather (lat, long) {
+
+    showloading() // show loading before fetch starts
+
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current_weather=true`)
+    .then((res) => res.json())
+    .then((data) => {
+        console.log(data)
+
+        let condition = data.current_weather.temperature;
+
+        container.innerHTML = ""
+
+        container.innerHTML += `
+        <div id="icontent">
+            <h2>Weather in ${city.value} is ${data.current_weather.temperature}°C</h2>
+        </div>
+        `
+
+        if(condition < 0){
+            container.innerHTML += `
+            <div id="icontent">
+                <h2>It's freezing cold outside</h2>
+            </div>
+            `
+        }
+        else if(condition < 20){
+            container.innerHTML += `
+            <div id="icontent">
+                <img style="height:250px; width:250px" src="https://i.pinimg.com/1200x/9f/a0/45/9fa0456d6325eacf4ee0f757e423959f.jpg">
+                <br>  <h2>It's cold outside</h2>
+            </div>
+            `
+        }
+        else if(condition < 32){
+            container.innerHTML += `
+            <div id="icontent">
+                <img style="height:250px; width:250px" src="https://i.pinimg.com/1200x/5c/00/44/5c0044b2b5d57f1a0e63280c2a4db10e.jpg">
+                <br>  <h2>Temperature is normal </h2>
+            </div>
+            `
+        }
+        else{
+            container.innerHTML += `
+            <div id="icontent">
+                <img style="height:250px; width:250px" src="https://i.pinimg.com/1200x/ff/16/1e/ff161e4f72e8865804b56aec4053cf9f.jpg">
+                <br> <h2>High temperature</h2>
+            </div>
+            `
+        }
+
+        isloading = false
+    })
+}
+
+function getlatandlong() {
+
+    isloading = true
+    showloading()
+
+    fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city.value}&count=1`)
+    .then((res) => res.json())
+    .then((data) => {
+        console.log(data)
+
+        let lat = data.results[0].latitude
+        let long = data.results[0].longitude
+
+        console.log(lat, long)
+
+        getweather(lat, long)
+    })
+}
+
+btn.addEventListener('click', () => {
+    getlatandlong()
+})
+
+
+//
+//https://geocoding-api.open-meteo.com
+//https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41
+
+let container = document.getElementById("container")
+let city = document.getElementById("city")
+let btn = document.getElementById("btn")
+let isloading = true;
+
+
+
+function showloading() {
+    container.innerHTML = ""
+    container.innerHTML += `    
+    <div id="icontent">
+        <h2>Loading...</h2>
+    </div>
+    `
+}
+
+function getweather (lat, long) {
+fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current_weather=true`)
+.then((res) => res.json())
+.then((data) => {
+    console.log(data)  
+    
+    showloading()
+
+   let condition = data.current_weather.temperature;
+
+    container.innerHTML = ""
+
+    container.innerHTML += `
+    <div id="icontent">
+        <h2>Weather in ${city.value} is ${data.current_weather.temperature}°C</h2>
+        
+    </div>
+    `
+
+      if(condition < 0){
+
+           container.innerHTML += `
+
+           <div id="icontent">
+            <h2>It's freezing cold outside</h2>
+            </div>
+            `
+        }
+        else if(condition < 20){
+    
+             container.innerHTML += `
+          
+                <div id="icontent">
+                   <img style="height:250px; width:250px" src="https://i.pinimg.com/1200x/9f/a0/45/9fa0456d6325eacf4ee0f757e423959f.jpg">
+             <br>  <h2>It's cold outside</h2>
+            </div>
+            
+            `
+        }
+         else if(condition < 32){
+             container.innerHTML += `
+                <div id="icontent">
+                 <img style="height:250px; width:250px" src="https://i.pinimg.com/1200x/5c/00/44/5c0044b2b5d57f1a0e63280c2a4db10e.jpg">
+          <br>  <h2>Temperature is normal </h2>
+            </div>
+            `
+        }
+        else{
+            container.innerHTML += `
+               <div id="icontent">
+                <img style="height:250px; width:250px" src="https://i.pinimg.com/1200x/ff/16/1e/ff161e4f72e8865804b56aec4053cf9f.jpg">
+            <br> <h2>High temperature</h2>
+            </div>
+            `
+        }
+        isloading = false
+
+})
+}
+
+function getlatandlong() {
+fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city.value}&count=1`)
+.then((res) => res.json())
+.then((data) => {
+    console.log(data)
+    let lat = data.results[0].latitude
+    let long = data.results[0].longitude
+    console.log(lat, long)
+    getweather(lat, long)
+    isloading = true
+
+})
+}
+
+btn.addEventListener('click', () => {
+ getlatandlong()
+})
+

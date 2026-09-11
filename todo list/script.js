@@ -47,6 +47,7 @@ function toggleComplete(id) {
     display();
 }
 
+
 function display() {
     container.innerHTML = "";
 
