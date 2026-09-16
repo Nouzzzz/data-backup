@@ -1,0 +1,84 @@
+let container = document.getElementById("container");
+let note = document.getElementById("note");
+let addbtn = document.getElementById("addbtn");
+let speechbtn = document.getElementById('speechbtn');
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+addbtn.addEventListener("click", () => {
+    let contentValue = note.value.trim();
+
+    if (contentValue === "") {
+        alert("Empty list detected, plz fillout the field");
+        return;
+    }
+
+    let notecontent = { id: Date.now(), content: contentValue, completed: false };
+    notes.push(notecontent);
+
+    display();
+    updateLocalStorage();
+    clearfields();
+});
+
+speechbtn.addEventListener('click', () => {
+    speechrecognition();   
+});
+
+function speechrecognition() {
+    let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'en-US';
+    recognition.start();
+
+    recognition.onresult = function (event) {
+        let transcript = event.results[0][0].transcript;
+        note.value = transcript;
+
+        let notecontent = { id: Date.now(), content: transcript, completed: false };
+        notes.push(notecontent);
+        
+        display();
+        updateLocalStorage();
+        clearfields();
+    };       
+}
+
+function updateLocalStorage() {
+    localStorage.setItem("notes", JSON.stringify(notes));
+}
+
+function clearfields() {
+    note.value = "";
+}
+
+function deleteNote(id) {
+    notes = notes.filter(note => note.id !== id);
+    updateLocalStorage();
+    display();
+}
+
+function toggleComplete(id) {
+    let index = notes.findIndex(note => note.id === id);
+    if (index !== -1) {
+        notes[index].completed = !notes[index].completed;
+        updateLocalStorage();
+        display();
+    }
+}
+
+function display() {
+    container.innerHTML = "";
+
+    notes.forEach((item) => {
+        container.innerHTML += `
+            <div class="card">        
+                <h4 style="text-decoration: ${item.completed ? 'line-through' : 'none'};">${item.content}</h4><br>
+                <button id="completebtn-${item.id}" onclick="toggleComplete(${item.id})"> 
+                    ${item.completed ? 'Not Completed' : 'Complete'} 
+                </button>
+                <button onclick="deleteNote(${item.id})"> Delete</button>
+            </div>
+        `;
+    });
+}
+
+display();
