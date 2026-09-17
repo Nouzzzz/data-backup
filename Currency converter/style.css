@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+header {
+    background-color: salmon;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#convertbtn {
+    border-radius: 12px;
+    padding: 8px;
+    margin: 0 auto;
+}
+
+.contenta {
+    display: flex;
+    gap: 8px;
+    flex-direction: row;
+    padding: 20px;
+}
+
+.contenta input {
+   padding: 12px 18px;
+   margin: 0 auto;
+}
+
+.contentb {
+    display: flex;
+}
+
+#fromCurrency,
+#toCurrency
+{
+    padding: 6px;
+    border-radius: 12px;
+}
