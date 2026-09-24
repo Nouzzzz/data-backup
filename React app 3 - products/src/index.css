@@ -1,5 +1,5 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   margin: 20px;
 }
 
@@ -33,3 +33,21 @@ body {
 .card h4 {
   font-size: 18px;
 }
+
+.buybtn {
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.head {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  background-color: salmon;
+}
+
+
+/* .buybtn:hover{
+
+  
+} */

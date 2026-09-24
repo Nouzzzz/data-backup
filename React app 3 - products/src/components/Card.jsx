@@ -1,5 +1,14 @@
+
 function Card({ product }) {
-  return (
+  
+  const buy = () => {
+    
+    alert( (product.name +' added to cart \n') + ('Price is '+ product.price) );
+
+  };
+
+  return ( 
+
     <div className="card">
       <img src={product.image} alt={product.name} />
 
@@ -9,9 +18,10 @@ function Card({ product }) {
 
       <h4>₹{product.price}</h4>
 
-      <button>Buy</button>
+      <button className="buybtn" onClick={buy}>Add to cart</button>
     </div>
   );
 }
 
 export default Card;
+
