@@ -1,0 +1,111 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 10px;
+}
+
+.formheader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form {
+  width: 220px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input {
+  padding: 8px;
+  font-size: 12px;
+  border-radius: 12px;
+}
+
+.cardout {
+  border: 1px solid black;
+  background-color: whitesmoke;
+  padding: 50px 20px 20px;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 18px;
+  width: 300px;
+  margin: 20px auto;
+}
+
+button {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.cards {
+  width: 80%;
+  margin: 30px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+}
+
+.card {
+  width: 220px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.card:hover {
+  background-color: whitesmoke;
+}
+
+.submitbtn {
+  border-radius: 12px;
+  padding: 4px;
+  margin: 0 auto;
+}
+
+.submitbtn:hover {
+  background-color: green;
+  color: white;
+}
+
+.editbtn {
+
+  border-radius: 8px;
+  padding: 5px;
+
+}
+
+.editbtn:hover {
+  background-color: blue;
+  color: white;
+}
+
+.btns {
+  display: flex;
+  gap: 8px;
+}
+
+.deletebtn {
+  border-radius: 8px;
+  padding: 5px;
+
+}
+
+.deletebtn:hover {
+  background-color: red;
+  color: white;
+}
