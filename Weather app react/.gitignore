@@ -1,0 +1,101 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+import { useState } from "react"
+
+const Home = () => {
+  const [cityInput, setCityInput] = useState("")
+  const [weather, setWeather] = useState({
+    city: "",
+    temperature: null,
+  })
+
+  function getweather(lat, long, cityName) {
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current_weather=true`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Weather Data:", data)
+        
+       
+        setWeather({
+          city: cityName,
+          temperature: data.current_weather.temperature,
+        })
+      })
+      .catch((err) => console.error("Error fetching weather:", err))
+  }
+
+  function getlatandlong() {
+    if (!cityInput) return alert("Please enter a city name")
+
+    fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${cityInput}&count=1`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Geocoding Data:", data)
+
+        if (!data.results || data.results.length === 0) {
+          alert("City not found")
+          return
+        }
+
+        let lat = data.results[0].latitude
+        let long = data.results[0].longitude
+        let officialName = data.results[0].name
+
+    
+        getweather(lat, long, officialName)
+      })
+      .catch((err) => console.error("Error fetching coordinates:", err))
+  }
+
+  return (
+    <div>
+      <header>
+        <h1>Weather App</h1>
+      </header>
+    
+      <div className="searchmenu">
+       
+        <input 
+          type="search" 
+          placeholder="Enter a city name" 
+          value={cityInput}
+          onChange={(e) => setCityInput(e.target.value)}
+        />
+        <button className="btn" onClick={getlatandlong}>Get weather</button>
+      </div>
+
+     
+      {weather.temperature !== null && (
+        <div className="weather-display">
+          <h2>{weather.city}</h2>
+          <p>Temperature: {weather.temperature}°C</p>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default Home
