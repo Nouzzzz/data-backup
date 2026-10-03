@@ -1,0 +1,39 @@
+*{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  background-color: whitesmoke;
+}
+
+.searchmenu{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 38px;
+}
+
+.searchmenu input{
+    padding: 8px 12px;
+    border-radius: 18px;
+}
+
+.btn {
+  border-radius: 12px;
+  background-color: white;
+}
+
+.btn:hover {
+   background-color: whitesmoke;
+}
+
+.gallery {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  
+}
