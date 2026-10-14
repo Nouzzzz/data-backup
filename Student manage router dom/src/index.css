@@ -1,0 +1,91 @@
+@import "tailwindcss"; 
+
+.outerform {
+  
+}
+
+form {
+  width: 250px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.innerform {
+  background-color: whitesmoke;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  border-radius: 12px;
+}
+
+.innerform input {
+    padding: 5px;
+    display: flex;
+    gap: 5px;
+    margin: auto;
+}
+
+
+.submitbtn {
+    border-radius: 8px;
+    background-color: rgb(46, 17, 214);
+    color: white;
+    padding: 3px;
+    margin: auto;
+}
+
+
+
+.cards {
+  width: 80%;
+  margin: 30px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+}
+
+.card {
+  width: 220px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.card:hover {
+  background-color: whitesmoke;
+}
+
+.editbtn {
+
+  border-radius: 8px;
+  padding: 5px;
+
+}
+
+.editbtn:hover {
+  background-color: blue;
+  color: white;
+}
+
+.btns {
+  display: flex;
+  gap: 8px;
+}
+
+.deletebtn {
+  border-radius: 8px;
+  padding: 5px;
+
+}
+
+.deletebtn:hover {
+  background-color: red;
+  color: white;
+}
