@@ -3,36 +3,52 @@ import AuthContext from "../context/AuthContext";
 import NoteContext from "../context/NoteContext";
 
 const AddNote = () => {
+  const { currentUser } = useContext(AuthContext);
+  const { createNote } = useContext(NoteContext);
 
-    const { currentUser } = useContext(AuthContext);
-    const {createNote,notes} = useContext(NoteContext)
+  const [data, setData] = useState({
+    title: "",
+    details: "",
+  });
 
-     const [data, setdata] = useState({
-        title: "",
-        details: "",
-    });
+  const handleInput = (e) => {
+    const { name, value } = e.target;
 
-    const handleInput = (e) => {
-        const { name, value } = e.target;
+    setData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-        setdata((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!currentUser) {
+      alert("Please login first!");
+      return;
+    }
+
+    if (!data.title.trim() || !data.details.trim()) {
+      alert("Please fill in all fields!");
+      return;
+    }
+
+    const newNote = {
+      id: Date.now(),
+      title: data.title.trim(),
+      details: data.details.trim(),
+      owner: currentUser.id,
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    createNote(newNote);
 
-        const newnote = {
-            title: data.title,
-            details: data.details,
-            owner: currentUser.id
-        };
+    alert("Note added successfully!");
 
-        createNote(newnote);
-
-    }
+    setData({
+      title: "",
+      details: "",
+    });
+  };
 
   return (
     <div>

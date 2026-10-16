@@ -15,13 +15,27 @@ const Dasgboard = () => {
     <div className='p-3'>
       Dashboard
 
-     <div>
-         {
-          filterNotes(notes).map((note) => (
-            <Card key={note.id} note={note} />
-          ))
-         }
-     </div>
+
+    
+<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {filterNotes(notes).map((note, index) => (
+    <Card
+      key={note.id ?? `${note.owner}-${index}`}
+      note={note}
+    />
+  ))}
+</div>
+
+
+{/* <div>
+  {filterNotes(notes).map((note, index) => (
+    <Card
+      key={note.id ?? `${note.owner}-${index}`}
+      note={note}
+    />
+  ))}
+</div> */}
+
 
     </div>
   )
