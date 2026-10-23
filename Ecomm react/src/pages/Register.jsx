@@ -52,7 +52,7 @@ const Register = () => {
         
         <form onSubmit={handleSubmit} className='flex flex-col items-center justify-center shadow-lg p-5 gap-3 rounded-md bg-gray-200 '>
 
-        <input value={userdata.username} name="username"  onChange={handleInput} type="text" placeholder="Enter Username" />
+        <input value={userdata.username} name="username"  onChange={handleInput} type="text" placeholder="Enter Name" />
          <input value={userdata.email} name="email"  onChange={handleInput} type="text" placeholder="Enter email" />
 
         <input value={userdata.password} name="password" onChange={handleInput} type="password"  placeholder="Enter Password"/>

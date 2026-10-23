@@ -4,6 +4,7 @@ import AuthContext from '../context/AuthContext'
 import { CiLight } from "react-icons/ci";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { ThemeContext } from '../context/ThemeContext';
+import { BsCart2 } from "react-icons/bs";
 
 const Navbar = () => {
 
@@ -14,9 +15,10 @@ const Navbar = () => {
   return (
     
     <div className="flex items-center justify-between bg-blue-600 p-3 text-white shadow-md text-xl">
-        E commerce App
+      <Link to={"/"}>  E commerce App  </Link> 
      <div className='text-sm flex gap-3'>
            <div className="flex gap-6">
+            
         {currentUser ? 
 
         
@@ -37,9 +39,11 @@ const Navbar = () => {
 
           </div>
          : 
-          <div className="flex gap-3">
+          <div className="flex gap-4 items-center">
+            <Link to="/login" className='flex item-center'> <BsCart2 size={15} /> </Link>
             <Link to="/login">Login</Link>
             <Link to="/register">Register</Link>
+
 
                 <button onClick={toggleTheme} className="flex items-center">
           {darkMode ? (
