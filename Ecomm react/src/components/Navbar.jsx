@@ -1,72 +1,53 @@
-import { useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom' 
-import AuthContext from '../context/AuthContext'
+
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
+import CartContext from "../context/CartContext";
+import { ThemeContext } from "../context/ThemeContext";
 import { CiLight } from "react-icons/ci";
 import { MdOutlineDarkMode } from "react-icons/md";
-import { ThemeContext } from '../context/ThemeContext';
 import { BsCart2 } from "react-icons/bs";
+import toast from "react-hot-toast";
 
-const Navbar = () => {
-
- const navigate = useNavigate()
+function Navbar() {
+  const navigate = useNavigate();
+  const { user, logout } = useContext(AuthContext);
+  const { cart } = useContext(CartContext);
   const { darkMode, toggleTheme } = useContext(ThemeContext);
-  const { currentUser, logout } = useContext(AuthContext)
+
+  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+  const handleLogout = () => {
+    logout();
+    toast.success("Logged out successfully!");
+    navigate("/login");
+  };
 
   return (
-    
-    <div className="flex items-center justify-between bg-blue-600 p-3 text-white shadow-md text-xl">
-      <Link to={"/"}>  E commerce App  </Link> 
-     <div className='text-sm flex gap-3'>
-           <div className="flex gap-6">
-            
-        {currentUser ? 
+    <nav className="flex items-center justify-between bg-blue-600 p-4 text-white shadow-md">
+      <Link to="/" className="text-3xl font-semibold">ShopEase</Link>
 
-        
-          <div className="flex gap-3 item-center justify-center">
-            
-            <button onClick={() => {
-                logout()
-                 navigate("/login")
-            }}>Logout</button>
+      <div className="flex items-center gap-5 text-sm">
+        <Link to="/cart" className="relative flex items-center p-1">
+          <BsCart2 size={22} />
+          {cartCount > 0 && <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs font-bold">{cartCount}</span>}
+        </Link>
 
-          <button onClick={toggleTheme} className="flex items-center">
-          {darkMode ? (
-            <CiLight size={15} />
-          ) : (
-            <MdOutlineDarkMode size={15} />
-          )}
+        {user ? (
+          <button className="text-lg" onClick={handleLogout}>Logout</button>
+        ) : (
+          <>
+            <Link className="text-lg" to="/login">Login</Link>
+            <Link className="text-lg" to="/register">Register</Link>
+          </>
+        )}
+
+        <button onClick={toggleTheme} className="flex items-center" title="Toggle theme">
+          {darkMode ? <CiLight size={23} /> : <MdOutlineDarkMode size={20} />}
         </button>
-
-          </div>
-         : 
-          <div className="flex gap-4 items-center">
-            <Link to="/login" className='flex item-center'> <BsCart2 size={15} /> </Link>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-
-
-                <button onClick={toggleTheme} className="flex items-center">
-          {darkMode ? (
-            <CiLight size={15} />
-          ) : (
-            <MdOutlineDarkMode size={15} />
-          )}
-        </button>
-
-          </div>
-        }
       </div>
-     </div>
-
-
-
-
-    </div>
-
-    
-
-   
-  )
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;

@@ -1,95 +1,68 @@
+
 import { createContext, useState } from "react";
-import toast from "react-hot-toast";
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(
-    JSON.parse(localStorage.getItem("currentuser")) || null
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("shopeaseUser")) || null
   );
 
-  const [users, setUsers] = useState(
-    JSON.parse(localStorage.getItem("users")) || []
-  );
+  const register = (data) => {
+    const users =
+      JSON.parse(localStorage.getItem("shopeaseUsers")) || [];
 
-  const registerUser = (data) => {
-    const { username, email, password } = data;
-
-    const userWithUsername = users.find(
-      (x) => x.username == username
+    const emailExists = users.find(
+      (item) => item.email === data.email
     );
 
-      const userWithemail = users.find(
-      (x) => x.email == email
-    );
-
-
-    if (userWithUsername) {
-      toast.error("User already registered");
-      return false;
+    if (emailExists) {
+      return {
+        success: false,
+        message: "An account with this email already exists."
+      };
     }
 
-    if (userWithemail) {
-      toast.error("Email already registered");
-      return false;
-    }
+    users.push(data);
 
-    const updatedUsers = [...users, data];
+    localStorage.setItem("shopeaseUsers", JSON.stringify(users));
 
-    setUsers(updatedUsers);
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
-
-    toast.success("User registered successfully");
-    return true;
+    return { success: true };
   };
 
-  const loginUser = (data) => {
-    const { username, email,  password } = data;
+  const login = (email, password) => {
+    const users =
+      JSON.parse(localStorage.getItem("shopeaseUsers")) || [];
 
-    const user = users.find(
-      (x) => x.username == username
+    const foundUser = users.find(
+      (item) => item.email === email && item.password === password
     );
 
-       if (!user) {
-      toast.error("User not registered");
-      return false;
+    if (!foundUser) {
+      return {
+        success: false,
+        message: "Invalid email or password."
+      };
     }
 
-       const checkemail = users.find(
-      (x) => x.email == email
-    );
+    setUser(foundUser);
+    localStorage.setItem("shopeaseUser", JSON.stringify(foundUser));
 
-    if (!checkemail) {
-      toast.error("Email not registered");
-      return false;
-    }
-
-    const verified = user.password == password;
-
-    if (!verified) {
-      toast.error("Invalid credentials");
-      return false;
-    }
-
-    setCurrentUser(user);
-    localStorage.setItem("currentuser", JSON.stringify(user));
-
-    toast.success("Login successful");
-    return true;
+    return { success: true };
   };
 
   const logout = () => {
-    setCurrentUser(null);
-    localStorage.removeItem("currentuser");
-    return true;
+    setUser(null);
+    localStorage.removeItem("shopeaseUser");
   };
 
   return (
-    <AuthContext.Provider value={{currentUser, users,loginUser,registerUser,logout,}}>
-    {children}
+    <AuthContext.Provider
+      value={{ user, register, login, logout }}
+    >
+      {children}
     </AuthContext.Provider>
   );
-};
+}
 
 export default AuthContext;
-

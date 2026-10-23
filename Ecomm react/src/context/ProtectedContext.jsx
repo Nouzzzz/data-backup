@@ -1,11 +1,10 @@
-import React from 'react'
-import { useContext } from 'react'
-import AuthContext from './AuthContext'
-import { Navigate } from 'react-router-dom'
+import { useContext } from "react";
+import { Navigate } from "react-router-dom";
+import AuthContext from "./AuthContext";
 
-const ProtectedContext = ({ children }) => {
-  const { currentUser } = useContext(AuthContext)
-  return currentUser ? children : <Navigate to="/login" />
+function ProtectedContext({ children }) {
+  const { user } = useContext(AuthContext);
+  return user ? children : <Navigate to="/login" replace />;
 }
 
-export default ProtectedContext
+export default ProtectedContext;

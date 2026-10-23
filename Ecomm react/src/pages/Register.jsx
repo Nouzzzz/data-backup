@@ -1,68 +1,61 @@
+
 import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { ThemeContext } from "../context/ThemeContext";
+import toast from "react-hot-toast";
 
-const Register = () => {
-  const { registerUser } = useContext(AuthContext);
-    const { darkMode, toggleTheme } = useContext(ThemeContext);
+function Register() {
+  const { register } = useContext(AuthContext);
+  const { darkMode } = useContext(ThemeContext);
+  const navigate = useNavigate();
 
-  const [userdata, setUserdata] = useState({
-    username: "",
-    email: "",
-    password: "",
-    password2: ""
-
-  });
+  const [userdata, setUserdata] = useState({ name: "", email: "", password: "", confirmPassword: "" });
 
   const handleInput = (e) => {
     const { name, value } = e.target;
-
-    setUserdata((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setUserdata({ ...userdata, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newuser = {
-      id: Date.now(),
-      username: userdata.username,
-      email: userdata.email,
-      password: userdata.password,
-      password2: userdata.password2
-    };
+    if (userdata.password !== userdata.confirmPassword) {
+      toast.error("Passwords do not match!");
+      return;
+    }
 
-    const registered = registerUser(newuser);
+    const result = register({ name: userdata.name, email: userdata.email.trim().toLowerCase(), password: userdata.password });
 
-    if (registered) {
-      setUserdata({
-        username: "",
-        email: "",
-        password: "",
-         password2 : "",
-      });
+    if (result.success) {
+      toast.success("Registration successful!");
+      navigate("/login");
+    } else {
+      toast.error(result.message || "Registration failed!");
     }
   };
 
   return (
-    <div className={`min-h-screen p-3 flex items-center justify-center
-     ${ darkMode ? "min-h-screen bg-black text-white"  : "min-h-screen bg-white text-black"  }`} >
-        
-        <form onSubmit={handleSubmit} className='flex flex-col items-center justify-center shadow-lg p-5 gap-3 rounded-md bg-gray-200 '>
+    <div className={`flex flex-1 items-center justify-center p-5 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-800"}`}>
+      <form onSubmit={handleSubmit} className={`w-full max-w-sm rounded-lg p-6 shadow-md ${darkMode ? "bg-gray-800" : "bg-white"}`}>
 
-        <input value={userdata.username} name="username"  onChange={handleInput} type="text" placeholder="Enter Name" />
-         <input value={userdata.email} name="email"  onChange={handleInput} type="text" placeholder="Enter email" />
+        <label htmlFor="name" className="mb-1 block">Name</label>
+        <input id="name" type="text" name="name" value={userdata.name} onChange={handleInput} placeholder="Enter your name" autoComplete="name" required className={`mb-4 w-full rounded border p-2 outline-none focus:ring-2 focus:ring-blue-500 ${darkMode ? "border-gray-600 bg-gray-700 text-white" : "border-gray-300 bg-white text-gray-800"}`} />
 
-        <input value={userdata.password} name="password" onChange={handleInput} type="password"  placeholder="Enter Password"/>
-        <input value={userdata.password2} name="password2" onChange={handleInput} type="password"  placeholder="confirm Password"/>
+        <label htmlFor="email" className="mb-1 block">Email</label>
+        <input id="email" type="email" name="email" value={userdata.email} onChange={handleInput} placeholder="Enter your email" autoComplete="email" required className={`mb-4 w-full rounded border p-2 outline-none focus:ring-2 focus:ring-blue-500 ${darkMode ? "border-gray-600 bg-gray-700 text-white" : "border-gray-300 bg-white text-gray-800"}`} />
 
-        <button className="bg-blue-600 text-white rounded-md p-1 text-xs " type="submit">Register</button>
+        <label htmlFor="password" className="mb-1 block">Password</label>
+        <input id="password" type="password" name="password" value={userdata.password} onChange={handleInput} placeholder="Create a password" autoComplete="new-password" minLength={6} required className={`mb-4 w-full rounded border p-2 outline-none focus:ring-2 focus:ring-blue-500 ${darkMode ? "border-gray-600 bg-gray-700 text-white" : "border-gray-300 bg-white text-gray-800"}`} />
+
+        <label htmlFor="confirmPassword" className="mb-1 block">Confirm Password</label>
+        <input id="confirmPassword" type="password" name="confirmPassword" value={userdata.confirmPassword} onChange={handleInput} placeholder="Confirm your password" autoComplete="new-password" minLength={6} required className={`mb-5 w-full rounded border p-2 outline-none focus:ring-2 focus:ring-blue-500 ${darkMode ? "border-gray-600 bg-gray-700 text-white" : "border-gray-300 bg-white text-gray-800"}`} />
+
+        <button type="submit" className="w-full rounded bg-blue-600 p-2 text-white hover:bg-blue-700">Create Account</button>
+
       </form>
     </div>
   );
-};
+}
 
 export default Register;
-
