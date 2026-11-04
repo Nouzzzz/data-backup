@@ -1,11 +1,14 @@
 
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useSelector } from 'react-redux'
 import Navbar from '../components/Navbar'
+import { ThemeContext } from '../context/ThemeContext'
 
 function Dashboard() {
 
     const user = useSelector((state) => state.auth.user)
+    const { darkMode } = useContext(ThemeContext)
+
     const [search, setSearch] = useState('')
 
     const handleSearch = (e) => {
@@ -15,7 +18,9 @@ function Dashboard() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-950 text-white">
+        <div className={`min-h-screen ${
+            darkMode ? 'bg-gray-950 text-white' : 'bg-gray-100 text-gray-900'
+        }`}>
 
             <Navbar />
 
@@ -25,11 +30,11 @@ function Dashboard() {
                     Welcome back, {user?.name}!
                 </h1>
 
-                <p className="text-gray-400 mt-2">
+                <p className={`mt-2 ${
+                    darkMode ? 'text-gray-400' : 'text-gray-600'
+                }`}>
                     Discover your favourite movies.
                 </p>
-
-                {/* Movie Search */}
 
                 <form onSubmit={handleSearch} className="flex gap-3 mt-8">
 
@@ -38,19 +43,21 @@ function Dashboard() {
                         placeholder="Search movies..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="flex-1 bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 outline-none focus:border-red-500"
+                        className={`flex-1 border rounded-lg px-4 py-3 outline-none focus:border-red-500 ${
+                            darkMode
+                                ? 'bg-gray-900 border-gray-700 text-white'
+                                : 'bg-white border-gray-300 text-gray-900'
+                        }`}
                     />
 
                     <button
                         type="submit"
-                        className="bg-red-600 hover:bg-red-700 px-6 rounded-lg"
+                        className="bg-red-600 hover:bg-red-700 text-white px-6 rounded-lg"
                     >
                         Search
                     </button>
 
                 </form>
-
-                {/* Movie Listing */}
 
                 <div className="mt-12">
 
@@ -58,9 +65,13 @@ function Dashboard() {
                         Discover Movies
                     </h2>
 
-                    <div className="text-center py-20 bg-gray-900 rounded-xl">
+                    <div className={`text-center py-20 rounded-xl ${
+                        darkMode ? 'bg-gray-900' : 'bg-white'
+                    }`}>
 
-                        <p className="text-gray-400">
+                        <p className={
+                            darkMode ? 'text-gray-400' : 'text-gray-600'
+                        }>
                             Search for movies to see the results here.
                         </p>
 
