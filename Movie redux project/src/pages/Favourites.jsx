@@ -1,17 +1,12 @@
-
 import { useContext } from 'react'
-import Navbar from '../components/Navbar'
 import { ThemeContext } from '../context/ThemeContext'
-import { FiHeart } from 'react-icons/fi'
 
-function Favourites() {
+const Favourites = () => {
 
     const { darkMode } = useContext(ThemeContext)
 
     return (
         <div className={`${darkMode ? 'bg-gray-950 text-white' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
-
-            <Navbar />
 
             <div className="max-w-6xl mx-auto px-6 py-10">
 

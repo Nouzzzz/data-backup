@@ -2,7 +2,7 @@
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
-function ProtectedRoute({ children }) {
+const ProtectedRoute = ({ children }) => {
 
     const user = useSelector((state) => state.auth.user)
 

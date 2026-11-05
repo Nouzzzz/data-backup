@@ -1,0 +1,40 @@
+
+1. Database Operations
+
+• show dbs – Lists all available databases.
+• use <db_name> – Switches to a specified database (creates it automatically if it doesn't exist once data is inserted).
+• db – Displays the name of the current database.
+• db.dropDatabase() – Deletes the current database.
+• db.stats() – Returns runtime storage statistics for the active database.
+
+2. Collection Operations
+
+• show collections – Lists all collections inside the current database.
+• db.createCollection('<name>') – Explicitly creates a new collection.
+• db.<collection_name>.drop() – Deletes a collection along with all of its documents.
+
+3. Create (Insert) Operations
+
+• db.<collection>.insertOne({ ... }) – Inserts a single document into the collection.
+• db.<collection>.insertMany([{ ... }, { ... }]) – Inserts multiple documents simultaneously via an array.
+
+4. Read (Find) Operations
+
+• db.<collection>.find() – Retrieves all documents from the collection.
+• db.<collection>.find({ <filter> }) – Filters documents based on key-value pairs (e.g., { status: "active" }).
+• db.<collection>.findOne({ <filter> }) – Returns only the first document that matches the query.
+• db.<collection>.find().limit(<number>) – Restricts the number of documents returned.
+• db.<collection>.find().skip(<number>) – Skips a specified number of documents (useful for pagination).
+• db.<collection>.find().sort({ <field>: 1 }) – Sorts results (1 for ascending order, -1 for descending order).
+• db.<collection>.countDocuments({ <filter> }) – Counts the matching documents.
+
+5. Update Operations
+
+• db.<collection>.updateOne({ <filter> }, { $set: { <field>: <value> } }) – Modifies the first document matching the filter using the $set operator.
+• db.<collection>.updateMany({ <filter> }, { $set: { <field>: <value> } }) – Modifies all documents matching the filter.
+• db.<collection>.updateOne({ <filter> }, { $inc: { <field>: <value> } }) – Increments a numeric field by a specific value.
+
+6. Delete Operations
+
+• db.<collection>.deleteOne({ <filter> }) – Deletes the first document matching the filter.
+• db.<collection>.deleteMany({ <filter> }) – Deletes all documents matching the filter.

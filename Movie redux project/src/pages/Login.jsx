@@ -1,12 +1,10 @@
-
 import { useState, useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../redux/slices/authSlice'
 import { Link, useNavigate } from 'react-router-dom'
 import { ThemeContext } from '../context/ThemeContext'
-import { FiFilm } from 'react-icons/fi'
 
-function Login() {
+const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -39,7 +37,7 @@ function Login() {
     }
 
     return (
-        <div className={`${darkMode ? 'bg-gray-950 text-white' : 'bg-gray-100 text-gray-900'} min-h-screen flex items-center justify-center px-4`}>
+        <div className={`${darkMode ? 'bg-gray-950 text-white' : 'bg-gray-100 text-gray-900'} min-h-screen flex items-center justify-center p-5`}>
 
             <div className={`w-full max-w-md p-8 rounded-xl ${
                 darkMode ? 'bg-gray-900' : 'bg-white shadow-lg'

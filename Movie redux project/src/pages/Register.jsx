@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { register } from '../redux/slices/authSlice'
 import { Link, useNavigate } from 'react-router-dom'
 import { ThemeContext } from '../context/ThemeContext'
-import { FiFilm } from 'react-icons/fi'
 
-function Register() {
+const Register = () => {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -24,11 +23,6 @@ function Register() {
 
         if (!name || !email || !password) {
             setError('Please fill all fields')
-            return
-        }
-
-        if (password.length < 6) {
-            setError('Password must be at least 6 characters')
             return
         }
 
@@ -52,7 +46,7 @@ function Register() {
     }
 
     return (
-        <div className={`${darkMode ? 'bg-gray-950 text-white' : 'bg-gray-100 text-gray-900'} min-h-screen flex items-center justify-center px-4`}>
+        <div className={`${darkMode ? 'bg-gray-950 text-white' : 'bg-gray-100 text-gray-900'} min-h-screen flex items-center justify-center p-5`}>
 
             <div className={`w-full max-w-md p-8 rounded-xl ${
                 darkMode ? 'bg-gray-900' : 'bg-white shadow-lg'

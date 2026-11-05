@@ -1,33 +1,28 @@
-
 import { useState, useContext } from 'react'
 import { useSelector } from 'react-redux'
-import Navbar from '../components/Navbar'
 import { ThemeContext } from '../context/ThemeContext'
 
-function Dashboard() {
+const Dashboard = () => {
 
     const user = useSelector((state) => state.auth.user)
     const { darkMode } = useContext(ThemeContext)
 
     const [search, setSearch] = useState('')
 
-    const handleSearch = (e) => {
-        e.preventDefault()
-
-        console.log('Searching for:', search)
-    }
+    // const handleSearch = (e) => {
+    //     e.preventDefault()
+    // }
 
     return (
         <div className={`min-h-screen ${
             darkMode ? 'bg-gray-950 text-white' : 'bg-gray-100 text-gray-900'
         }`}>
 
-            <Navbar />
 
             <div className="max-w-6xl mx-auto px-6 py-10">
 
                 <h1 className="text-3xl font-bold">
-                    Welcome back, {user?.name}!
+                    Welcome back, {user?.name}
                 </h1>
 
                 <p className={`mt-2 ${
@@ -35,7 +30,7 @@ function Dashboard() {
                 }`}>
                     Discover your favourite movies.
                 </p>
-
+{/* 
                 <form onSubmit={handleSearch} className="flex gap-3 mt-8">
 
                     <input
@@ -57,7 +52,7 @@ function Dashboard() {
                         Search
                     </button>
 
-                </form>
+                </form> */}
 
                 <div className="mt-12">
 
